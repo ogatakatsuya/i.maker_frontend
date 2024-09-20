@@ -27,4 +27,4 @@ jobs:
 
       - name: Run npm build in Container
         run: |
-          docker exec imaker_frontend-i.maker_frontend sh -c "npm run build"
+          docker exec imaker_frontend-i.maker_frontend-1 sh -c "npm run build"
