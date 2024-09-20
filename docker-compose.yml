@@ -1,0 +1,17 @@
+version: '3'
+services:
+  i.maker_frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+      - type: volume
+        source: node_modules
+        target: /app/node_modules
+    command: npm run dev
+
+volumes:
+  node_modules:
