@@ -17,8 +17,11 @@ jobs:
           node-version: 18.18.0
           cache: npm
 
+      - name: remove-node-modules
+        run: rm -rf node_modules package-lock.json
+
       - name: npm-install
-        run: npm i
+        run: npm install
 
       - name: app-build
         run: npm run build
