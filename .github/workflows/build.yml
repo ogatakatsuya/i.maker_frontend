@@ -1,31 +1,24 @@
-name: Build
-
+name: Build Test
 on:
   push:
     branches:
       - main
 
-permissions:
-  contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: checkout
+        uses: actions/checkout@v3
 
-      - name: Build and Start Services
-        run: |
-          docker compose build
-          docker compose up -d
+      - name: setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
 
-      - name: List Docker Containers
-        run: |
-          docker container ls
+      - name: npm-install
+        run: npm i
 
-      - name: Run npm build in Container
-        run: |
-          npm install
-          npm run build
+      - name: app-build
+        run: npm run build
