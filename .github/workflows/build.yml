@@ -21,6 +21,10 @@ jobs:
           docker compose build
           docker compose up -d
 
+      - name: List Docker Containers
+        run: |
+          docker container ls
+
       - name: Run npm build in Container
         run: |
-          docker exec imaker_frontend-i.maker_frontend-1 --init npm run build
+          docker exec imaker_frontend-i.maker_frontend-1 npm run build
