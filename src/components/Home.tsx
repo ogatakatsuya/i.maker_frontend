@@ -9,7 +9,9 @@ const Home = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await getQuizSetsQuizSetsGet();
-			setQuizSets(response.data.quiz_sets);
+			if (response.data?.quiz_sets) {
+				setQuizSets(response.data.quiz_sets);
+			}
 		};
 		fetchData();
 	}, []);
