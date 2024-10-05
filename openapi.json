@@ -1,0 +1,465 @@
+{
+	"openapi": "3.1.0",
+	"info": { "title": "FastAPI", "version": "0.1.0" },
+	"paths": {
+		"/quiz_sets": {
+			"get": {
+				"summary": "Get Quiz Sets",
+				"operationId": "get_quiz_sets_quiz_sets_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/GetQuizSetsResponse" }
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"summary": "Create Quiz Set",
+				"operationId": "create_quiz_set_quiz_sets_post",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/CreateQuizSetRequest" }
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateQuizSetResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/quiz_sets/{quiz_set_id}": {
+			"get": {
+				"summary": "Get Quiz Set",
+				"operationId": "get_quiz_set_quiz_sets__quiz_set_id__get",
+				"parameters": [
+					{
+						"name": "quiz_set_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "integer", "title": "Quiz Set Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/GetQuizSetResponse" }
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"summary": "Delete Quiz Set",
+				"operationId": "delete_quiz_set_quiz_sets__quiz_set_id__delete",
+				"parameters": [
+					{
+						"name": "quiz_set_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "integer", "title": "Quiz Set Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteQuizSetResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/question/{quiz_set_id}": {
+			"post": {
+				"summary": "Add Question",
+				"operationId": "add_question_question__quiz_set_id__post",
+				"parameters": [
+					{
+						"name": "quiz_set_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "integer", "title": "Quiz Set Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/AddQuestionRequest" }
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/AddQuestionResponse" }
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/groups": {
+			"get": {
+				"summary": "Get Groups",
+				"operationId": "get_groups_groups_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/GetGroupsResponse" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/groups/{quiz_set_id}": {
+			"get": {
+				"summary": "Get Groups By Quiz Set Id",
+				"operationId": "get_groups_by_quiz_set_id_groups__quiz_set_id__get",
+				"parameters": [
+					{
+						"name": "quiz_set_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "integer", "title": "Quiz Set Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetGroupsByQuizSetIdResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"summary": "Register Group",
+				"operationId": "register_group_groups__quiz_set_id__post",
+				"parameters": [
+					{
+						"name": "quiz_set_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "integer", "title": "Quiz Set Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/CreateGroupRequest" }
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/groups/{group_id}": {
+			"put": {
+				"summary": "Register Score",
+				"operationId": "register_score_groups__group_id__put",
+				"parameters": [
+					{
+						"name": "group_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "integer", "title": "Group Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/RegisterScoreRequest" }
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RegisterScoreResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"AddQuestionRequest": {
+				"properties": {
+					"content": { "type": "string", "title": "Content" },
+					"hint": { "type": "string", "title": "Hint" },
+					"answers": {
+						"items": { "type": "string" },
+						"type": "array",
+						"title": "Answers"
+					}
+				},
+				"type": "object",
+				"required": ["content", "hint", "answers"],
+				"title": "AddQuestionRequest"
+			},
+			"AddQuestionResponse": {
+				"properties": { "message": { "type": "string", "title": "Message" } },
+				"type": "object",
+				"required": ["message"],
+				"title": "AddQuestionResponse"
+			},
+			"Answers": {
+				"properties": {
+					"id": { "type": "integer", "title": "Id" },
+					"content": { "type": "string", "title": "Content" }
+				},
+				"type": "object",
+				"required": ["id", "content"],
+				"title": "Answers"
+			},
+			"CreateGroupRequest": {
+				"properties": { "name": { "type": "string", "title": "Name" } },
+				"type": "object",
+				"required": ["name"],
+				"title": "CreateGroupRequest"
+			},
+			"CreateQuizSetRequest": {
+				"properties": {
+					"title": { "type": "string", "title": "Title" },
+					"description": { "type": "string", "title": "Description" }
+				},
+				"type": "object",
+				"required": ["title", "description"],
+				"title": "CreateQuizSetRequest"
+			},
+			"CreateQuizSetResponse": {
+				"properties": {
+					"title": { "type": "string", "title": "Title" },
+					"description": { "type": "string", "title": "Description" },
+					"id": { "type": "integer", "title": "Id" }
+				},
+				"type": "object",
+				"required": ["title", "description", "id"],
+				"title": "CreateQuizSetResponse"
+			},
+			"DeleteQuizSetResponse": {
+				"properties": { "message": { "type": "string", "title": "Message" } },
+				"type": "object",
+				"required": ["message"],
+				"title": "DeleteQuizSetResponse"
+			},
+			"GetGroupsByQuizSetIdResponse": {
+				"properties": {
+					"groups": {
+						"items": { "$ref": "#/components/schemas/GroupSchema" },
+						"type": "array",
+						"title": "Groups"
+					}
+				},
+				"type": "object",
+				"required": ["groups"],
+				"title": "GetGroupsByQuizSetIdResponse"
+			},
+			"GetGroupsResponse": {
+				"properties": {
+					"groups": {
+						"items": { "$ref": "#/components/schemas/GroupSchema" },
+						"type": "array",
+						"title": "Groups"
+					}
+				},
+				"type": "object",
+				"required": ["groups"],
+				"title": "GetGroupsResponse"
+			},
+			"GetQuizSetResponse": {
+				"properties": {
+					"id": { "type": "integer", "title": "Id" },
+					"title": { "type": "string", "title": "Title" },
+					"questions": {
+						"items": { "$ref": "#/components/schemas/Questions" },
+						"type": "array",
+						"title": "Questions"
+					}
+				},
+				"type": "object",
+				"required": ["id", "title", "questions"],
+				"title": "GetQuizSetResponse"
+			},
+			"GetQuizSetsResponse": {
+				"properties": {
+					"quiz_sets": {
+						"items": { "$ref": "#/components/schemas/CreateQuizSetResponse" },
+						"type": "array",
+						"title": "Quiz Sets"
+					}
+				},
+				"type": "object",
+				"required": ["quiz_sets"],
+				"title": "GetQuizSetsResponse"
+			},
+			"GroupSchema": {
+				"properties": {
+					"name": { "type": "string", "title": "Name" },
+					"score": {
+						"anyOf": [{ "type": "integer" }, { "type": "null" }],
+						"title": "Score"
+					},
+					"quiz_set_id": { "type": "integer", "title": "Quiz Set Id" },
+					"id": { "type": "integer", "title": "Id" },
+					"played_at": { "type": "string", "title": "Played At" }
+				},
+				"type": "object",
+				"required": ["name", "score", "quiz_set_id", "id", "played_at"],
+				"title": "GroupSchema"
+			},
+			"HTTPValidationError": {
+				"properties": {
+					"detail": {
+						"items": { "$ref": "#/components/schemas/ValidationError" },
+						"type": "array",
+						"title": "Detail"
+					}
+				},
+				"type": "object",
+				"title": "HTTPValidationError"
+			},
+			"Questions": {
+				"properties": {
+					"id": { "type": "integer", "title": "Id" },
+					"content": { "type": "string", "title": "Content" },
+					"hint": { "type": "string", "title": "Hint" },
+					"answers": {
+						"items": { "$ref": "#/components/schemas/Answers" },
+						"type": "array",
+						"title": "Answers"
+					}
+				},
+				"type": "object",
+				"required": ["id", "content", "hint", "answers"],
+				"title": "Questions"
+			},
+			"RegisterScoreRequest": {
+				"properties": { "value": { "type": "integer", "title": "Value" } },
+				"type": "object",
+				"required": ["value"],
+				"title": "RegisterScoreRequest"
+			},
+			"RegisterScoreResponse": {
+				"properties": { "message": { "type": "string", "title": "Message" } },
+				"type": "object",
+				"required": ["message"],
+				"title": "RegisterScoreResponse"
+			},
+			"ValidationError": {
+				"properties": {
+					"loc": {
+						"items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+						"type": "array",
+						"title": "Location"
+					},
+					"msg": { "type": "string", "title": "Message" },
+					"type": { "type": "string", "title": "Error Type" }
+				},
+				"type": "object",
+				"required": ["loc", "msg", "type"],
+				"title": "ValidationError"
+			}
+		}
+	}
+}

@@ -1,9 +1,29 @@
+import { useEffect, useState } from "react";
+import { getQuizSetsQuizSetsGet } from "../client";
+import type { GetQuizSetsResponse } from "../client/types.gen";
+
 const Home = () => {
-	const apiUrl = import.meta.env.VITE_API_URL;
+	const [quizSets, setQuizSets] = useState<GetQuizSetsResponse["quiz_sets"]>(
+		[],
+	);
+	useEffect(() => {
+		const fetchData = async () => {
+			const response = await getQuizSetsQuizSetsGet();
+			setQuizSets(response.data.quiz_sets);
+		};
+		fetchData();
+	}, []);
 	return (
 		<div>
-			<h1>Home</h1>
-			<p>API URL: {apiUrl}</p>
+			<h1>問題セット一覧</h1>
+			<ul>
+				{quizSets.map((quizSet) => (
+					<li key={quizSet.id}>
+						<h2>{quizSet.title}</h2>
+						<p>{quizSet.description}</p>
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 };
