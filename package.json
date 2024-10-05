@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc -b && vite build",
-		"lint": "eslint .",
+		"lint": "npx @biomejs/biome check .",
 		"preview": "vite preview"
 	},
 	"dependencies": {
@@ -30,5 +30,24 @@
 	},
 	"optionalDependencies": {
 		"@rollup/rollup-linux-x64-gnu": "4.6.1"
+	},
+	"files": {
+		"ignore": [
+			"**/node_modules/**",
+			"**/.next/**",
+			"**/.vercel/**",
+			"**/out/**",
+			"**/public/**",
+			"**/coverage/**",
+			"**/dist/**",
+			"**/build/**",
+			"**/tmp/**",
+			"**/temp/**",
+			"**/vendor/**",
+			"**/dll/**",
+			"**/bower_components",
+			"**/_openapi/**",
+			"**/globals.css"
+		]
 	}
 }

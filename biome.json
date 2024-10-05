@@ -6,8 +6,23 @@
 		"useIgnoreFile": false
 	},
 	"files": {
-		"ignoreUnknown": false,
-		"ignore": []
+		"ignore": [
+			"**/node_modules/**",
+			"**/.next/**",
+			"**/.vercel/**",
+			"**/out/**",
+			"**/public/**",
+			"**/coverage/**",
+			"**/dist/**",
+			"**/build/**",
+			"**/tmp/**",
+			"**/temp/**",
+			"**/vendor/**",
+			"**/dll/**",
+			"**/bower_components",
+			"**/_openapi/**",
+			"**/globals.css"
+		]
 	},
 	"formatter": {
 		"enabled": true,
