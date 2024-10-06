@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getQuizSetsQuizSetsGet } from "../client";
+import { getQuizSets } from "../client";
 import type { GetQuizSetsResponse } from "../client/types.gen";
 
 const QuizIndex = () => {
@@ -8,7 +8,7 @@ const QuizIndex = () => {
 	);
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await getQuizSetsQuizSetsGet();
+			const response = await getQuizSets();
 			if (response.data?.quiz_sets) {
 				setQuizSets(response.data.quiz_sets);
 			}

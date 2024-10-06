@@ -6,31 +6,31 @@ import {
 	createConfig,
 } from "@hey-api/client-axios";
 import type {
-	AddQuestionQuestionQuizSetIdPostData,
-	AddQuestionQuestionQuizSetIdPostError,
-	AddQuestionQuestionQuizSetIdPostResponse,
-	CreateQuizSetQuizSetsPostData,
-	CreateQuizSetQuizSetsPostError,
-	CreateQuizSetQuizSetsPostResponse,
-	DeleteQuizSetQuizSetsQuizSetIdDeleteData,
-	DeleteQuizSetQuizSetsQuizSetIdDeleteError,
-	DeleteQuizSetQuizSetsQuizSetIdDeleteResponse,
-	GetGroupsByQuizSetIdGroupsQuizSetIdGetData,
-	GetGroupsByQuizSetIdGroupsQuizSetIdGetError,
-	GetGroupsByQuizSetIdGroupsQuizSetIdGetResponse,
-	GetGroupsGroupsGetError,
-	GetGroupsGroupsGetResponse,
-	GetQuizSetQuizSetsQuizSetIdGetData,
-	GetQuizSetQuizSetsQuizSetIdGetError,
-	GetQuizSetQuizSetsQuizSetIdGetResponse,
-	GetQuizSetsQuizSetsGetError,
-	GetQuizSetsQuizSetsGetResponse,
-	RegisterGroupGroupsQuizSetIdPostData,
-	RegisterGroupGroupsQuizSetIdPostError,
-	RegisterGroupGroupsQuizSetIdPostResponse,
-	RegisterScoreGroupsGroupIdPutData,
-	RegisterScoreGroupsGroupIdPutError,
-	RegisterScoreGroupsGroupIdPutResponse,
+	AddQuestionData,
+	AddQuestionError,
+	AddQuestionResponse2,
+	CreateQuizSetData,
+	CreateQuizSetError,
+	CreateQuizSetResponse2,
+	DeleteQuizSetData,
+	DeleteQuizSetError,
+	DeleteQuizSetResponse2,
+	GetGroupsByQuizSetIdData,
+	GetGroupsByQuizSetIdError,
+	GetGroupsByQuizSetIdResponse2,
+	GetGroupsError,
+	GetGroupsResponse2,
+	GetQuizSetData,
+	GetQuizSetError,
+	GetQuizSetResponse2,
+	GetQuizSetsError,
+	GetQuizSetsResponse2,
+	RegisterGroupData,
+	RegisterGroupError,
+	RegisterGroupResponse,
+	RegisterScoreData,
+	RegisterScoreError,
+	RegisterScoreResponse2,
 } from "./types.gen";
 
 const baseURL = import.meta.env.VITE_API_URL;
@@ -43,13 +43,14 @@ export const client = createClient(
 
 /**
  * Get Quiz Sets
+ * Get all quiz sets
  */
-export const getQuizSetsQuizSetsGet = <ThrowOnError extends boolean = false>(
+export const getQuizSets = <ThrowOnError extends boolean = false>(
 	options?: Options<unknown, ThrowOnError>,
 ) => {
 	return (options?.client ?? client).get<
-		GetQuizSetsQuizSetsGetResponse,
-		GetQuizSetsQuizSetsGetError,
+		GetQuizSetsResponse2,
+		GetQuizSetsError,
 		ThrowOnError
 	>({
 		...options,
@@ -59,13 +60,14 @@ export const getQuizSetsQuizSetsGet = <ThrowOnError extends boolean = false>(
 
 /**
  * Create Quiz Set
+ * Create a quiz set
  */
-export const createQuizSetQuizSetsPost = <ThrowOnError extends boolean = false>(
-	options: Options<CreateQuizSetQuizSetsPostData, ThrowOnError>,
+export const createQuizSet = <ThrowOnError extends boolean = false>(
+	options: Options<CreateQuizSetData, ThrowOnError>,
 ) => {
 	return (options?.client ?? client).post<
-		CreateQuizSetQuizSetsPostResponse,
-		CreateQuizSetQuizSetsPostError,
+		CreateQuizSetResponse2,
+		CreateQuizSetError,
 		ThrowOnError
 	>({
 		...options,
@@ -75,15 +77,14 @@ export const createQuizSetQuizSetsPost = <ThrowOnError extends boolean = false>(
 
 /**
  * Get Quiz Set
+ * Get a quiz set by ID
  */
-export const getQuizSetQuizSetsQuizSetIdGet = <
-	ThrowOnError extends boolean = false,
->(
-	options: Options<GetQuizSetQuizSetsQuizSetIdGetData, ThrowOnError>,
+export const getQuizSet = <ThrowOnError extends boolean = false>(
+	options: Options<GetQuizSetData, ThrowOnError>,
 ) => {
 	return (options?.client ?? client).get<
-		GetQuizSetQuizSetsQuizSetIdGetResponse,
-		GetQuizSetQuizSetsQuizSetIdGetError,
+		GetQuizSetResponse2,
+		GetQuizSetError,
 		ThrowOnError
 	>({
 		...options,
@@ -93,15 +94,14 @@ export const getQuizSetQuizSetsQuizSetIdGet = <
 
 /**
  * Delete Quiz Set
+ * Delete a quiz set by ID
  */
-export const deleteQuizSetQuizSetsQuizSetIdDelete = <
-	ThrowOnError extends boolean = false,
->(
-	options: Options<DeleteQuizSetQuizSetsQuizSetIdDeleteData, ThrowOnError>,
+export const deleteQuizSet = <ThrowOnError extends boolean = false>(
+	options: Options<DeleteQuizSetData, ThrowOnError>,
 ) => {
 	return (options?.client ?? client).delete<
-		DeleteQuizSetQuizSetsQuizSetIdDeleteResponse,
-		DeleteQuizSetQuizSetsQuizSetIdDeleteError,
+		DeleteQuizSetResponse2,
+		DeleteQuizSetError,
 		ThrowOnError
 	>({
 		...options,
@@ -111,15 +111,14 @@ export const deleteQuizSetQuizSetsQuizSetIdDelete = <
 
 /**
  * Add Question
+ * Add a question to a quiz set
  */
-export const addQuestionQuestionQuizSetIdPost = <
-	ThrowOnError extends boolean = false,
->(
-	options: Options<AddQuestionQuestionQuizSetIdPostData, ThrowOnError>,
+export const addQuestion = <ThrowOnError extends boolean = false>(
+	options: Options<AddQuestionData, ThrowOnError>,
 ) => {
 	return (options?.client ?? client).post<
-		AddQuestionQuestionQuizSetIdPostResponse,
-		AddQuestionQuestionQuizSetIdPostError,
+		AddQuestionResponse2,
+		AddQuestionError,
 		ThrowOnError
 	>({
 		...options,
@@ -129,13 +128,14 @@ export const addQuestionQuestionQuizSetIdPost = <
 
 /**
  * Get Groups
+ * Get all groups
  */
-export const getGroupsGroupsGet = <ThrowOnError extends boolean = false>(
+export const getGroups = <ThrowOnError extends boolean = false>(
 	options?: Options<unknown, ThrowOnError>,
 ) => {
 	return (options?.client ?? client).get<
-		GetGroupsGroupsGetResponse,
-		GetGroupsGroupsGetError,
+		GetGroupsResponse2,
+		GetGroupsError,
 		ThrowOnError
 	>({
 		...options,
@@ -145,15 +145,14 @@ export const getGroupsGroupsGet = <ThrowOnError extends boolean = false>(
 
 /**
  * Get Groups By Quiz Set Id
+ * Get all groups by quiz set ID
  */
-export const getGroupsByQuizSetIdGroupsQuizSetIdGet = <
-	ThrowOnError extends boolean = false,
->(
-	options: Options<GetGroupsByQuizSetIdGroupsQuizSetIdGetData, ThrowOnError>,
+export const getGroupsByQuizSetId = <ThrowOnError extends boolean = false>(
+	options: Options<GetGroupsByQuizSetIdData, ThrowOnError>,
 ) => {
 	return (options?.client ?? client).get<
-		GetGroupsByQuizSetIdGroupsQuizSetIdGetResponse,
-		GetGroupsByQuizSetIdGroupsQuizSetIdGetError,
+		GetGroupsByQuizSetIdResponse2,
+		GetGroupsByQuizSetIdError,
 		ThrowOnError
 	>({
 		...options,
@@ -163,15 +162,14 @@ export const getGroupsByQuizSetIdGroupsQuizSetIdGet = <
 
 /**
  * Register Group
+ * Register a group
  */
-export const registerGroupGroupsQuizSetIdPost = <
-	ThrowOnError extends boolean = false,
->(
-	options: Options<RegisterGroupGroupsQuizSetIdPostData, ThrowOnError>,
+export const registerGroup = <ThrowOnError extends boolean = false>(
+	options: Options<RegisterGroupData, ThrowOnError>,
 ) => {
 	return (options?.client ?? client).post<
-		RegisterGroupGroupsQuizSetIdPostResponse,
-		RegisterGroupGroupsQuizSetIdPostError,
+		RegisterGroupResponse,
+		RegisterGroupError,
 		ThrowOnError
 	>({
 		...options,
@@ -181,15 +179,14 @@ export const registerGroupGroupsQuizSetIdPost = <
 
 /**
  * Register Score
+ * Register a score
  */
-export const registerScoreGroupsGroupIdPut = <
-	ThrowOnError extends boolean = false,
->(
-	options: Options<RegisterScoreGroupsGroupIdPutData, ThrowOnError>,
+export const registerScore = <ThrowOnError extends boolean = false>(
+	options: Options<RegisterScoreData, ThrowOnError>,
 ) => {
 	return (options?.client ?? client).put<
-		RegisterScoreGroupsGroupIdPutResponse,
-		RegisterScoreGroupsGroupIdPutError,
+		RegisterScoreResponse2,
+		RegisterScoreError,
 		ThrowOnError
 	>({
 		...options,

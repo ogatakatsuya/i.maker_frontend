@@ -4,8 +4,10 @@
 	"paths": {
 		"/quiz_sets": {
 			"get": {
+				"tags": ["Quiz Sets"],
 				"summary": "Get Quiz Sets",
-				"operationId": "get_quiz_sets_quiz_sets_get",
+				"description": "Get all quiz sets",
+				"operationId": "get_quiz_sets",
 				"responses": {
 					"200": {
 						"description": "Successful Response",
@@ -18,8 +20,10 @@
 				}
 			},
 			"post": {
+				"tags": ["Quiz Sets"],
 				"summary": "Create Quiz Set",
-				"operationId": "create_quiz_set_quiz_sets_post",
+				"description": "Create a quiz set",
+				"operationId": "create_quiz_set",
 				"requestBody": {
 					"content": {
 						"application/json": {
@@ -52,8 +56,10 @@
 		},
 		"/quiz_sets/{quiz_set_id}": {
 			"get": {
+				"tags": ["Quiz Sets"],
 				"summary": "Get Quiz Set",
-				"operationId": "get_quiz_set_quiz_sets__quiz_set_id__get",
+				"description": "Get a quiz set by ID",
+				"operationId": "get_quiz_set",
 				"parameters": [
 					{
 						"name": "quiz_set_id",
@@ -82,8 +88,10 @@
 				}
 			},
 			"delete": {
+				"tags": ["Quiz Sets"],
 				"summary": "Delete Quiz Set",
-				"operationId": "delete_quiz_set_quiz_sets__quiz_set_id__delete",
+				"description": "Delete a quiz set by ID",
+				"operationId": "delete_quiz_set",
 				"parameters": [
 					{
 						"name": "quiz_set_id",
@@ -116,8 +124,10 @@
 		},
 		"/question/{quiz_set_id}": {
 			"post": {
+				"tags": ["Questions"],
 				"summary": "Add Question",
-				"operationId": "add_question_question__quiz_set_id__post",
+				"description": "Add a question to a quiz set",
+				"operationId": "add_question",
 				"parameters": [
 					{
 						"name": "quiz_set_id",
@@ -156,8 +166,10 @@
 		},
 		"/groups": {
 			"get": {
+				"tags": ["Groups"],
 				"summary": "Get Groups",
-				"operationId": "get_groups_groups_get",
+				"description": "Get all groups",
+				"operationId": "get_groups",
 				"responses": {
 					"200": {
 						"description": "Successful Response",
@@ -172,8 +184,10 @@
 		},
 		"/groups/{quiz_set_id}": {
 			"get": {
+				"tags": ["Groups"],
 				"summary": "Get Groups By Quiz Set Id",
-				"operationId": "get_groups_by_quiz_set_id_groups__quiz_set_id__get",
+				"description": "Get all groups by quiz set ID",
+				"operationId": "get_groups_by_quiz_set_id",
 				"parameters": [
 					{
 						"name": "quiz_set_id",
@@ -204,8 +218,10 @@
 				}
 			},
 			"post": {
+				"tags": ["Groups"],
 				"summary": "Register Group",
-				"operationId": "register_group_groups__quiz_set_id__post",
+				"description": "Register a group",
+				"operationId": "register_group",
 				"parameters": [
 					{
 						"name": "quiz_set_id",
@@ -225,7 +241,11 @@
 				"responses": {
 					"200": {
 						"description": "Successful Response",
-						"content": { "application/json": { "schema": {} } }
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/CreateGroupResponse" }
+							}
+						}
 					},
 					"422": {
 						"description": "Validation Error",
@@ -240,8 +260,10 @@
 		},
 		"/groups/{group_id}": {
 			"put": {
+				"tags": ["Groups"],
 				"summary": "Register Score",
-				"operationId": "register_score_groups__group_id__put",
+				"description": "Register a score",
+				"operationId": "register_score",
 				"parameters": [
 					{
 						"name": "group_id",
@@ -317,6 +339,12 @@
 				"type": "object",
 				"required": ["name"],
 				"title": "CreateGroupRequest"
+			},
+			"CreateGroupResponse": {
+				"properties": { "message": { "type": "string", "title": "Message" } },
+				"type": "object",
+				"required": ["message"],
+				"title": "CreateGroupResponse"
 			},
 			"CreateQuizSetRequest": {
 				"properties": {
