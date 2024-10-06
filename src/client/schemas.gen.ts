@@ -57,9 +57,13 @@ export const CreateGroupRequestSchema = {
 			type: "string",
 			title: "Name",
 		},
+		member_num: {
+			type: "integer",
+			title: "Member Num",
+		},
 	},
 	type: "object",
-	required: ["name"],
+	required: ["name", "member_num"],
 	title: "CreateGroupRequest",
 } as const;
 
@@ -197,6 +201,10 @@ export const GroupSchemaSchema = {
 			type: "string",
 			title: "Name",
 		},
+		member_num: {
+			type: "integer",
+			title: "Member Num",
+		},
 		score: {
 			anyOf: [
 				{
@@ -222,7 +230,7 @@ export const GroupSchemaSchema = {
 		},
 	},
 	type: "object",
-	required: ["name", "score", "quiz_set_id", "id", "played_at"],
+	required: ["name", "member_num", "score", "quiz_set_id", "id", "played_at"],
 	title: "GroupSchema",
 } as const;
 

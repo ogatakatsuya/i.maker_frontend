@@ -335,9 +335,12 @@
 				"title": "Answers"
 			},
 			"CreateGroupRequest": {
-				"properties": { "name": { "type": "string", "title": "Name" } },
+				"properties": {
+					"name": { "type": "string", "title": "Name" },
+					"member_num": { "type": "integer", "title": "Member Num" }
+				},
 				"type": "object",
-				"required": ["name"],
+				"required": ["name", "member_num"],
 				"title": "CreateGroupRequest"
 			},
 			"CreateGroupResponse": {
@@ -424,6 +427,7 @@
 			"GroupSchema": {
 				"properties": {
 					"name": { "type": "string", "title": "Name" },
+					"member_num": { "type": "integer", "title": "Member Num" },
 					"score": {
 						"anyOf": [{ "type": "integer" }, { "type": "null" }],
 						"title": "Score"
@@ -433,7 +437,14 @@
 					"played_at": { "type": "string", "title": "Played At" }
 				},
 				"type": "object",
-				"required": ["name", "score", "quiz_set_id", "id", "played_at"],
+				"required": [
+					"name",
+					"member_num",
+					"score",
+					"quiz_set_id",
+					"id",
+					"played_at"
+				],
 				"title": "GroupSchema"
 			},
 			"HTTPValidationError": {

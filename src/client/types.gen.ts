@@ -17,6 +17,7 @@ export type Answers = {
 
 export type CreateGroupRequest = {
 	name: string;
+	member_num: number;
 };
 
 export type CreateGroupResponse = {
@@ -58,6 +59,7 @@ export type GetQuizSetsResponse = {
 
 export type GroupSchema = {
 	name: string;
+	member_num: number;
 	score: number | null;
 	quiz_set_id: number;
 	id: number;
