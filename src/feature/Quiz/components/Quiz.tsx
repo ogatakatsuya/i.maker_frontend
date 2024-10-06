@@ -1,7 +1,6 @@
 import { ui } from "@yamada-ui/core";
 import {
 	Box,
-	Button,
 	DecimalList,
 	Divider,
 	Grid,
@@ -107,6 +106,7 @@ const Quiz = () => {
 					<Heading py={4}>注意事項</Heading>
 					<DecimalList>
 						{warningList.map((warning, index) => (
+							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 							<ListItem key={index}>
 								<Text>{warning}</Text>
 							</ListItem>
