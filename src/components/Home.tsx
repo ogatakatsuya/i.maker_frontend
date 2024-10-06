@@ -1,32 +1,36 @@
-import { useEffect, useState } from "react";
-import { getQuizSetsQuizSetsGet } from "../client";
-import type { GetQuizSetsResponse } from "../client/types.gen";
+import {
+	Button,
+	Center,
+	Icon,
+	Image,
+	Link,
+	Text,
+	VStack,
+} from "@yamada-ui/react";
+import { IoIosInformationCircleOutline } from "react-icons/io";
+import icon from "../assets/nazotoki_icon.png";
 
 const Home = () => {
-	const [quizSets, setQuizSets] = useState<GetQuizSetsResponse["quiz_sets"]>(
-		[],
-	);
-	useEffect(() => {
-		const fetchData = async () => {
-			const response = await getQuizSetsQuizSetsGet();
-			if (response.data?.quiz_sets) {
-				setQuizSets(response.data.quiz_sets);
-			}
-		};
-		fetchData();
-	}, []);
 	return (
-		<div>
-			<h1>問題セット一覧</h1>
-			<ul>
-				{quizSets.map((quizSet) => (
-					<li key={quizSet.id}>
-						<h2>{quizSet.title}</h2>
-						<p>{quizSet.description}</p>
-					</li>
-				))}
-			</ul>
-		</div>
+		<Center>
+			<VStack spacing={4}>
+				<Image
+					src={icon}
+					fallback="https://via.placeholder.com/512"
+					fallbackStrategy="onError"
+					maxWidth="100%"
+					height="auto"
+					objectFit="contain"
+					className="logo"
+				/>
+				<Button>ニックネーム登録</Button>
+				<Link>プライバシーポリシー/Privacy Policy</Link>
+				<Text>
+					<Icon as={IoIosInformationCircleOutline} />
+					2024 produced by i.maker
+				</Text>
+			</VStack>
+		</Center>
 	);
 };
 
