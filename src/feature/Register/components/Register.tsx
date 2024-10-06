@@ -1,7 +1,9 @@
 import { Box, Text, VStack } from "@yamada-ui/react";
+import { useParams } from "react-router-dom";
 import RegisterForm from "./RegisterForm";
 
 const Register = () => {
+	const { quiz_set_id } = useParams();
 	return (
 		<Box w="full" minHeight="100vh">
 			<VStack>
@@ -10,7 +12,7 @@ const Register = () => {
 						ニックネーム登録
 					</Text>
 				</Box>
-				<RegisterForm />
+				<RegisterForm quiz_set_id={quiz_set_id} />
 				<Text as="u" fontSize="sm">
 					ポータルサイト
 					<br />

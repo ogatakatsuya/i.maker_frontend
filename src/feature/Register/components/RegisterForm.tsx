@@ -8,8 +8,8 @@ import {
 } from "@yamada-ui/react";
 import useRegisterForm from "../hooks/useRegisterForm";
 
-const RegisterForm = () => {
-	const { register, onSubmit, errors } = useRegisterForm();
+const RegisterForm = ({ quiz_set_id }: { quiz_set_id: string | undefined }) => {
+	const { register, onSubmit, errors } = useRegisterForm(quiz_set_id);
 
 	return (
 		<VStack as="form" onSubmit={onSubmit} p={4}>
