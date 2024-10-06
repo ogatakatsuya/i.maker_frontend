@@ -167,6 +167,10 @@ export const GetQuizSetResponseSchema = {
 			type: "string",
 			title: "Title",
 		},
+		description: {
+			type: "string",
+			title: "Description",
+		},
 		questions: {
 			items: {
 				$ref: "#/components/schemas/Questions",
@@ -176,7 +180,7 @@ export const GetQuizSetResponseSchema = {
 		},
 	},
 	type: "object",
-	required: ["id", "title", "questions"],
+	required: ["id", "title", "description", "questions"],
 	title: "GetQuizSetResponse",
 } as const;
 

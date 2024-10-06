@@ -402,6 +402,7 @@
 				"properties": {
 					"id": { "type": "integer", "title": "Id" },
 					"title": { "type": "string", "title": "Title" },
+					"description": { "type": "string", "title": "Description" },
 					"questions": {
 						"items": { "$ref": "#/components/schemas/Questions" },
 						"type": "array",
@@ -409,7 +410,7 @@
 					}
 				},
 				"type": "object",
-				"required": ["id", "title", "questions"],
+				"required": ["id", "title", "description", "questions"],
 				"title": "GetQuizSetResponse"
 			},
 			"GetQuizSetsResponse": {

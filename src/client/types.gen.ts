@@ -50,6 +50,7 @@ export type GetGroupsResponse = {
 export type GetQuizSetResponse = {
 	id: number;
 	title: string;
+	description: string;
 	questions: Array<Questions>;
 };
 
