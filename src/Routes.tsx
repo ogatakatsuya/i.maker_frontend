@@ -11,8 +11,8 @@ const routes: RouteObject[] = [
 			{ path: "/", element: <QuizIndex /> },
 			{ path: "/test", element: <Test /> },
 			{ path: "/dynamic/:id", element: <DynamicTest /> },
-			{ path: "/home", element: <Home /> },
-			{ path: "/register", element: <Register /> },
+			{ path: "/home/:quiz_set_id", element: <Home /> },
+			{ path: "/register/:quiz_set_id", element: <Register /> },
 		],
 	},
 ];
