@@ -21,7 +21,7 @@ const Home = () => {
 	};
 	return (
 		<Box bg="gray.100" w="100%" minHeight="100vh" p={4}>
-			<VStack spacing={4} p={10}>
+			<VStack p={10}>
 				<Image
 					src={icon}
 					fallback="https://via.placeholder.com/512"
@@ -31,9 +31,7 @@ const Home = () => {
 					objectFit="contain"
 					className="logo"
 				/>
-				<Button onClick={handleClick} colorScheme="primary">
-					ニックネーム登録
-				</Button>
+				<Button onClick={handleClick}>ニックネーム登録</Button>
 				<Link>プライバシーポリシー/Privacy Policy</Link>
 				<Text>
 					<Icon as={IoIosInformationCircleOutline} />
