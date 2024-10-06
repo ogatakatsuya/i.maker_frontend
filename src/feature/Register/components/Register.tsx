@@ -1,9 +1,7 @@
 import { Box, Text, VStack } from "@yamada-ui/react";
-import { useParams } from "react-router-dom";
-import RegisterForm from "./registerForm";
+import RegisterForm from "./RegisterForm";
 
 const Register = () => {
-	const { quiz_set_id } = useParams();
 	return (
 		<Box w="full" minHeight="100vh">
 			<VStack>
@@ -11,9 +9,27 @@ const Register = () => {
 					<Text my={1} ml={2} color="#05397f">
 						ニックネーム登録
 					</Text>
-					<RegisterForm />
 				</Box>
-				<Text>あなたが解くのは問題{quiz_set_id}です。</Text>
+				<RegisterForm />
+				<Text as="u" fontSize="sm">
+					ポータルサイト
+					<br />
+					情報セキュリティに関する連絡先
+					<br />
+					ログインにお困りの場合はこちら
+				</Text>
+				<Text fontSize="sm">
+					＜お知らせ＞
+					<br />
+					MFA(多要素認証)はシステムごとに異なります。
+					<br />
+					それぞれの設定方法は<Text as="u">こちら</Text>をご確認ください。
+				</Text>
+				<Text fontSize="sm">
+					MFA settings are required separately for each system.
+					<br />
+					please read <Text as="u">this page.</Text>
+				</Text>
 			</VStack>
 		</Box>
 	);

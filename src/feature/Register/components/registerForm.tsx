@@ -1,25 +1,35 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
-import sampleFormSchema from "../schema/formSchema";
-import InputField from "./InputField";
-import SelectField from "./SelectField";
+import {
+	Button,
+	ErrorMessage,
+	FormControl,
+	Input,
+	Label,
+	VStack,
+} from "@yamada-ui/react";
+import useRegisterForm from "../hooks/useRegisterForm";
 
 const RegisterForm = () => {
-	const methods = useForm({
-		resolver: zodResolver(sampleFormSchema),
-	});
-	const { handleSubmit } = methods;
-	const onSubmit = (data) => {
-		console.log(data);
-	};
+	const { register, onSubmit, errors } = useRegisterForm();
+
 	return (
-		<FormProvider {...methods}>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<InputField name="input" />
-				<SelectField name="select" />
-				<button type="submit">Submit</button>
-			</form>
-		</FormProvider>
+		<VStack as="form" onSubmit={onSubmit} p={4}>
+			<FormControl isInvalid={!!errors.name}>
+				<Label htmlFor={"name"}>チーム名</Label>
+				<Input id="name" {...register("name")} />
+				<ErrorMessage>{errors.name?.message}</ErrorMessage>
+			</FormControl>
+			<FormControl isInvalid={!!errors.memberNum}>
+				<Label htmlFor={"memberNum"}>チームのメンバー数</Label>
+				<Input
+					id="memberNum"
+					{...register("memberNum", { valueAsNumber: true })}
+				/>
+				<ErrorMessage>{errors.memberNum?.message}</ErrorMessage>
+			</FormControl>
+			<Button type="submit" size="sm">
+				登録
+			</Button>
+		</VStack>
 	);
 };
 
