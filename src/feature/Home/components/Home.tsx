@@ -3,7 +3,7 @@ import { Box, Icon, Image, Link, Text, VStack } from "@yamada-ui/react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import icon from "../assets/nazotoki_icon.png";
+import icon from "../../../assets/nazotoki_icon.png";
 
 const Home = () => {
 	const { quiz_set_id } = useParams();
