@@ -19,7 +19,6 @@ const useRegisterForm = (quiz_set_id: string | undefined) => {
 	});
 
 	const onSubmit = async (data: RegisterFormSchemaType) => {
-		console.log("quiz_set_id", quiz_set_id);
 		const request: CreateGroupRequest = {
 			name: data.name,
 			member_num: data.memberNum,
