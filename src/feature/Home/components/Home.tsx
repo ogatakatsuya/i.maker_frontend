@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import icon from "../../../assets/nazotoki_icon.png";
 
 const Home = () => {
-	const { quiz_set_id } = useParams();
+	const { quiz_set_id } = useParams<{ quiz_set_id: string | undefined }>();
 	const Button = ui("button", {
 		baseStyle: {
 			py: "sm",

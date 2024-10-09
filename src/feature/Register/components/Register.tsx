@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import RegisterForm from "./RegisterForm";
 
 const Register = () => {
-	const { quiz_set_id } = useParams();
+	const { quiz_set_id } = useParams<{ quiz_set_id: string | undefined }>();
 	return (
 		<Box w="full" minHeight="100vh">
 			<VStack>

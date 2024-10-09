@@ -1,4 +1,3 @@
-import { ui } from "@yamada-ui/core";
 import {
 	Box,
 	DecimalList,
@@ -15,12 +14,15 @@ import { useEffect, useState } from "react";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { SlCalender } from "react-icons/sl";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getQuizSet } from "../../../client/services.gen";
 import type { GetQuizSetResponse } from "../../../client/types.gen";
+import CustomButton from "./CustomButton";
 
 const Quiz = () => {
-	const { quiz_set_id } = useParams<{ quiz_set_id: string }>();
+	const { quiz_set_id } = useParams<{ quiz_set_id: string | undefined }>();
 	const [quizSet, setQuizSet] = useState<GetQuizSetResponse | null>(null);
+	const navigation = useNavigate();
 	const warningList = [
 		"テストは静かな場所で受けてください。",
 		"他の人の答案を見ないでください。",
@@ -40,31 +42,14 @@ const Quiz = () => {
 				}
 			}
 		};
-
 		fetchQuizSet();
 	}, [quiz_set_id]);
-
-	const CustomButton = ui("button", {
-		baseStyle: {
-			py: "md",
-			px: "lg",
-			h: "100px",
-			rounded: "md",
-			bg: "gray.600",
-			_hover: { bg: "gray.700" },
-			color: "white",
-			fontSize: "5xl",
-			fontWeight: "bold",
-			_focus: { outline: "none", boxShadow: "none" },
-			_active: { bg: "gray.700" },
-		},
-	});
 
 	return (
 		<Box w="full" minHeight="100vh">
 			<VStack>
-				<Box bg="blue.100" textAlign="left">
-					<Text my={1} ml={2} color="#05397f">
+				<Box bg="gray.700" textAlign="left">
+					<Text my={1} ml={2} color="white">
 						{quizSet?.title}
 					</Text>
 				</Box>
@@ -113,8 +98,14 @@ const Quiz = () => {
 						))}
 					</DecimalList>
 				</Box>
-				<Box>
-					<CustomButton>答案1を開始</CustomButton>
+				<Box p={5}>
+					<CustomButton
+						onClick={() => {
+							navigation(`/question/${quiz_set_id}`);
+						}}
+					>
+						答案1を開始
+					</CustomButton>
 					<Text fontSize="sm" color="red.500" pt={1}>
 						合図があるまでこのボタンは押さないでください
 					</Text>

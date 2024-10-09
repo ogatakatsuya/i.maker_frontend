@@ -1,3 +1,12 @@
+import {
+	Box,
+	Heading,
+	Link,
+	List,
+	ListItem,
+	Text,
+	VStack,
+} from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 import { getQuizSets } from "../client";
 import type { GetQuizSetsResponse } from "../client/types.gen";
@@ -15,18 +24,25 @@ const QuizIndex = () => {
 		};
 		fetchData();
 	}, []);
+
 	return (
-		<div>
-			<h1>問題セット一覧</h1>
-			<ul>
-				{quizSets.map((quizSet) => (
-					<li key={quizSet.id}>
-						<h2>{quizSet.title}</h2>
-						<p>{quizSet.description}</p>
-					</li>
-				))}
-			</ul>
-		</div>
+		<Box maxW="800px" mx="auto" p={4}>
+			<Heading as="h1" size="xl" mb={6} textAlign="center">
+				問題セット一覧
+			</Heading>
+			<VStack spacing={4}>
+				<List spacing={3} w="100%">
+					{quizSets.map((quizSet) => (
+						<ListItem key={quizSet.id} p={4} borderWidth={1} borderRadius="md">
+							<Heading as="h2" size="md" mb={2}>
+								<Link href={`/home/${quizSet.id}`}>{quizSet.title}</Link>
+							</Heading>
+							<Text>{quizSet.description}</Text>
+						</ListItem>
+					))}
+				</List>
+			</VStack>
+		</Box>
 	);
 };
 
