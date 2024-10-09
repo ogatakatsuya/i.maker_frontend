@@ -30,8 +30,8 @@ const QuizIndex = () => {
 			<Heading as="h1" size="xl" mb={6} textAlign="center">
 				問題セット一覧
 			</Heading>
-			<VStack spacing={4}>
-				<List spacing={3} w="100%">
+			<VStack>
+				<List w="100%">
 					{quizSets.map((quizSet) => (
 						<ListItem key={quizSet.id} p={4} borderWidth={1} borderRadius="md">
 							<Heading as="h2" size="md" mb={2}>
