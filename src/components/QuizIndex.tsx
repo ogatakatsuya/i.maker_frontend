@@ -35,7 +35,7 @@ const QuizIndex = () => {
 					{quizSets.map((quizSet) => (
 						<ListItem key={quizSet.id} p={4} borderWidth={1} borderRadius="md">
 							<Heading as="h2" size="md" mb={2}>
-								<Link href={`/home/${quizSet.id}`}>{quizSet.title}</Link>
+								<Link href={`/home/${quizSet.sub_id}`}>{quizSet.title}</Link>
 							</Heading>
 							<Text>{quizSet.description}</Text>
 						</ListItem>

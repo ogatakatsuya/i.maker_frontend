@@ -2,7 +2,7 @@ import { Box, Heading, Text } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getQuizSet } from "../../../client/services.gen";
+import { getQuizSetBySubId } from "../../../client/services.gen";
 import type { GetQuizSetResponse } from "../../../client/types.gen";
 import { TimePerQuizSet } from "../../../lib/constants";
 import useQuizSetCount from "../hook/useQuizSetCount";
@@ -19,8 +19,8 @@ const QuizSet = () => {
 	useEffect(() => {
 		const fetchQuizSet = async () => {
 			if (quiz_set_id) {
-				const response = await getQuizSet({
-					path: { quiz_set_id: Number.parseInt(quiz_set_id) },
+				const response = await getQuizSetBySubId({
+					path: { sub_id: quiz_set_id },
 				});
 				if (response.data) {
 					setQuizSet(response.data);

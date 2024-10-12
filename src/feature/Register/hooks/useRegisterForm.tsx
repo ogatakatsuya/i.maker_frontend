@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { registerGroup } from "../../../client/services.gen";
+import { registerGroupWithSubId } from "../../../client/services.gen";
 import type { CreateGroupRequest } from "../../../client/types.gen";
 import {
 	type RegisterFormSchemaType,
@@ -26,9 +26,9 @@ const useRegisterForm = (quiz_set_id: string | undefined) => {
 		if (!quiz_set_id) {
 			return;
 		}
-		const response = await registerGroup({
+		const response = await registerGroupWithSubId({
 			body: request,
-			path: { quiz_set_id: Number.parseInt(quiz_set_id) },
+			path: { quiz_set_sub_id: quiz_set_id },
 		});
 		if (response.data?.message) {
 			navigation(`/quiz/${quiz_set_id}`);

@@ -122,6 +122,40 @@
 				}
 			}
 		},
+		"/quiz_sets/sub_id/{sub_id}": {
+			"get": {
+				"tags": ["Quiz Sets"],
+				"summary": "Get Quiz Set By Sub Id",
+				"description": "Get a quiz set by sub ID",
+				"operationId": "get_quiz_set_by_sub_id",
+				"parameters": [
+					{
+						"name": "sub_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Sub Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/GetQuizSetResponse" }
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
 		"/question/{quiz_set_id}": {
 			"post": {
 				"tags": ["Questions"],
@@ -301,6 +335,48 @@
 					}
 				}
 			}
+		},
+		"/groups/sub_id/{quiz_set_sub_id}": {
+			"post": {
+				"tags": ["Groups"],
+				"summary": "Register Group With Sub Id",
+				"description": "Register a group with quiz set sub ID",
+				"operationId": "register_group_with_sub_id",
+				"parameters": [
+					{
+						"name": "quiz_set_sub_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Quiz Set Sub Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/CreateGroupRequest" }
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/CreateGroupResponse" }
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"components": {
@@ -362,10 +438,11 @@
 				"properties": {
 					"title": { "type": "string", "title": "Title" },
 					"description": { "type": "string", "title": "Description" },
-					"id": { "type": "integer", "title": "Id" }
+					"id": { "type": "integer", "title": "Id" },
+					"sub_id": { "type": "string", "title": "Sub Id" }
 				},
 				"type": "object",
-				"required": ["title", "description", "id"],
+				"required": ["title", "description", "id", "sub_id"],
 				"title": "CreateQuizSetResponse"
 			},
 			"DeleteQuizSetResponse": {
@@ -407,10 +484,11 @@
 						"items": { "$ref": "#/components/schemas/Questions" },
 						"type": "array",
 						"title": "Questions"
-					}
+					},
+					"sub_id": { "type": "string", "title": "Sub Id" }
 				},
 				"type": "object",
-				"required": ["id", "title", "description", "questions"],
+				"required": ["id", "title", "description", "questions", "sub_id"],
 				"title": "GetQuizSetResponse"
 			},
 			"GetQuizSetsResponse": {

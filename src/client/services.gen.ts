@@ -20,6 +20,9 @@ import type {
 	GetGroupsByQuizSetIdResponse2,
 	GetGroupsError,
 	GetGroupsResponse2,
+	GetQuizSetBySubIdData,
+	GetQuizSetBySubIdError,
+	GetQuizSetBySubIdResponse,
 	GetQuizSetData,
 	GetQuizSetError,
 	GetQuizSetResponse2,
@@ -28,6 +31,9 @@ import type {
 	RegisterGroupData,
 	RegisterGroupError,
 	RegisterGroupResponse,
+	RegisterGroupWithSubIdData,
+	RegisterGroupWithSubIdError,
+	RegisterGroupWithSubIdResponse,
 	RegisterScoreData,
 	RegisterScoreError,
 	RegisterScoreResponse2,
@@ -106,6 +112,23 @@ export const deleteQuizSet = <ThrowOnError extends boolean = false>(
 	>({
 		...options,
 		url: "/quiz_sets/{quiz_set_id}",
+	});
+};
+
+/**
+ * Get Quiz Set By Sub Id
+ * Get a quiz set by sub ID
+ */
+export const getQuizSetBySubId = <ThrowOnError extends boolean = false>(
+	options: Options<GetQuizSetBySubIdData, ThrowOnError>,
+) => {
+	return (options?.client ?? client).get<
+		GetQuizSetBySubIdResponse,
+		GetQuizSetBySubIdError,
+		ThrowOnError
+	>({
+		...options,
+		url: "/quiz_sets/sub_id/{sub_id}",
 	});
 };
 
@@ -191,5 +214,22 @@ export const registerScore = <ThrowOnError extends boolean = false>(
 	>({
 		...options,
 		url: "/groups/{group_id}",
+	});
+};
+
+/**
+ * Register Group With Sub Id
+ * Register a group with quiz set sub ID
+ */
+export const registerGroupWithSubId = <ThrowOnError extends boolean = false>(
+	options: Options<RegisterGroupWithSubIdData, ThrowOnError>,
+) => {
+	return (options?.client ?? client).post<
+		RegisterGroupWithSubIdResponse,
+		RegisterGroupWithSubIdError,
+		ThrowOnError
+	>({
+		...options,
+		url: "/groups/sub_id/{quiz_set_sub_id}",
 	});
 };

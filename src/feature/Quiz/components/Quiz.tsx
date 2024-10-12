@@ -15,7 +15,7 @@ import { IoMdCheckboxOutline } from "react-icons/io";
 import { SlCalender } from "react-icons/sl";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getQuizSet } from "../../../client/services.gen";
+import { getQuizSetBySubId } from "../../../client/services.gen";
 import type { GetQuizSetResponse } from "../../../client/types.gen";
 import CustomButton from "./CustomButton";
 
@@ -34,8 +34,8 @@ const Quiz = () => {
 	useEffect(() => {
 		const fetchQuizSet = async () => {
 			if (quiz_set_id) {
-				const response = await getQuizSet({
-					path: { quiz_set_id: Number.parseInt(quiz_set_id) },
+				const response = await getQuizSetBySubId({
+					path: { sub_id: quiz_set_id },
 				});
 				if (response.data) {
 					setQuizSet(response.data);
