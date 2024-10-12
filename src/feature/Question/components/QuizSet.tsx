@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@yamada-ui/react";
+import { Box, Divider, Heading, Text, VStack } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -39,17 +39,42 @@ const QuizSet = () => {
 	const currentQuestion = quizSet?.questions[questionIndex];
 
 	return (
-		<Box>
-			<Heading>Quiz Set</Heading>
-			<Text>Time Limit: {timeLimit}</Text>
-			{currentQuestion && (
-				<Question
-					questionIndex={questionIndex}
-					setQuestionIndex={setQuestionIndex}
-					question={currentQuestion}
-				/>
-			)}
-		</Box>
+		<VStack>
+			<Box
+				bg="gray.600"
+				textAlign="center"
+				height="40px"
+				display="flex"
+				alignItems="center"
+				justifyContent="center"
+				fontSize="xl"
+			>
+				<Text color="white" as="b">
+					期末試験 再試
+				</Text>
+			</Box>
+			<Box px={5}>
+				<Heading py={3} as="h1" size="lg" textAlign="left">
+					{quizSet?.title} 期末追加試験
+				</Heading>
+				<Divider />
+				<Box textAlign="left" p={3}>
+					<Text as="b">課題コンテンツ</Text>
+					<Text fontSize="sm">
+						配った問題の解答を記入してください。他チームとの協働は厳禁です。発見次第報告させていただいます。
+					</Text>
+				</Box>
+				<Divider />
+				<Text>Time Limit: {timeLimit}</Text>
+				{currentQuestion && (
+					<Question
+						questionIndex={questionIndex}
+						setQuestionIndex={setQuestionIndex}
+						question={currentQuestion}
+					/>
+				)}
+			</Box>
+		</VStack>
 	);
 };
 

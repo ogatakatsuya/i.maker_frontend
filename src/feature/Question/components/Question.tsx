@@ -1,4 +1,4 @@
-import { Box, Container, Heading, Text } from "@yamada-ui/react";
+import { Box, Container, Text } from "@yamada-ui/react";
 import { useState } from "react";
 import type { Questions } from "../../../client/types.gen";
 import { TimePerQuestion, TimeToDisplayHint } from "../../../lib/constants";
@@ -19,28 +19,30 @@ const Question = ({
 	useQuestionCount(timeLimit, setTimeLimit, setQuestionIndex, TimePerQuestion);
 
 	return (
-		<Box>
-			<Heading>Question</Heading>
+		<Container>
 			<Text>Time Limit: {timeLimit}</Text>
-			{question.hint ? (
-				<Text>問題{questionIndex + 1}</Text>
-			) : (
-				<Text>最終問題</Text>
-			)}
-			<Text>{question.content}</Text>
-			{question.hint &&
-				(timeLimit <= TimeToDisplayHint ? (
-					<Container>
-						<Text>ヒント：{question.hint}</Text>
-					</Container>
+			<Box>
+				{question.hint ? (
+					<Text fontSize="2xl" textAlign="left">
+						第{questionIndex + 1}問
+					</Text>
 				) : (
-					<Container>
-						<Text>
-							ヒントは{timeLimit - TimeToDisplayHint}秒後に表示されます
-						</Text>
-					</Container>
-				))}
-		</Box>
+					<Text>最終問題</Text>
+				)}
+				{question.hint &&
+					(timeLimit <= TimeToDisplayHint ? (
+						<Box>
+							<Text>ヒント：{question.hint}</Text>
+						</Box>
+					) : (
+						<Box>
+							<Text>
+								ヒントは{timeLimit - TimeToDisplayHint}秒後に表示されます
+							</Text>
+						</Box>
+					))}
+			</Box>
+		</Container>
 	);
 };
 
