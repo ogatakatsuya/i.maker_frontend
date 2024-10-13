@@ -1,12 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { registerGroupWithSubId } from "../../../client/services.gen";
-import type {
-	CreateGroupRequest,
-	CreateGroupResponse,
-} from "../../../client/types.gen";
+import type { CreateGroupRequest } from "../../../client/types.gen";
 import {
 	type RegisterFormSchemaType,
 	registerFormSchema,
@@ -34,10 +30,10 @@ const useRegisterForm = (quiz_set_id: string | undefined) => {
 			body: request,
 			path: { quiz_set_sub_id: quiz_set_id },
 		});
-		if (response.code === "ERR_BAD_REQUEST") {
-			alert(response.error.detail);
+		console.log(response);
+		if (response.status === 400) {
+			alert(response.error?.detail);
 		}
-		console.log("response", response);
 		if (response.data?.message) {
 			navigation(`/quiz/${quiz_set_id}`);
 		}
