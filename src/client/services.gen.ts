@@ -28,6 +28,9 @@ import type {
 	GetQuizSetResponse2,
 	GetQuizSetsError,
 	GetQuizSetsResponse2,
+	GetScoreData,
+	GetScoreError,
+	GetScoreResponse2,
 	RegisterGroupData,
 	RegisterGroupError,
 	RegisterGroupResponse,
@@ -37,6 +40,8 @@ import type {
 	RegisterScoreData,
 	RegisterScoreError,
 	RegisterScoreResponse2,
+	TestGetError,
+	TestGetResponse,
 } from "./types.gen";
 
 const baseURL = import.meta.env.VITE_API_URL;
@@ -213,7 +218,24 @@ export const registerScore = <ThrowOnError extends boolean = false>(
 		ThrowOnError
 	>({
 		...options,
-		url: "/groups/{group_id}",
+		url: "/groups/{group_id}/score",
+	});
+};
+
+/**
+ * Get Score
+ * Get score
+ */
+export const getScore = <ThrowOnError extends boolean = false>(
+	options: Options<GetScoreData, ThrowOnError>,
+) => {
+	return (options?.client ?? client).get<
+		GetScoreResponse2,
+		GetScoreError,
+		ThrowOnError
+	>({
+		...options,
+		url: "/groups/{group_id}/score",
 	});
 };
 
@@ -231,5 +253,21 @@ export const registerGroupWithSubId = <ThrowOnError extends boolean = false>(
 	>({
 		...options,
 		url: "/groups/sub_id/{quiz_set_sub_id}",
+	});
+};
+
+/**
+ * Test
+ */
+export const testGet = <ThrowOnError extends boolean = false>(
+	options?: Options<unknown, ThrowOnError>,
+) => {
+	return (options?.client ?? client).get<
+		TestGetResponse,
+		TestGetError,
+		ThrowOnError
+	>({
+		...options,
+		url: "/",
 	});
 };

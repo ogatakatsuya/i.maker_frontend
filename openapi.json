@@ -292,7 +292,7 @@
 				}
 			}
 		},
-		"/groups/{group_id}": {
+		"/groups/{group_id}/score": {
 			"put": {
 				"tags": ["Groups"],
 				"summary": "Register Score",
@@ -322,6 +322,38 @@
 								"schema": {
 									"$ref": "#/components/schemas/RegisterScoreResponse"
 								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"tags": ["Groups"],
+				"summary": "Get Score",
+				"description": "Get score",
+				"operationId": "get_score",
+				"parameters": [
+					{
+						"name": "group_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "integer", "title": "Group Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/GetScoreResponse" }
 							}
 						}
 					},
@@ -377,6 +409,18 @@
 					}
 				}
 			}
+		},
+		"/": {
+			"get": {
+				"summary": "Test",
+				"operationId": "test__get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					}
+				}
+			}
 		}
 	},
 	"components": {
@@ -420,9 +464,9 @@
 				"title": "CreateGroupRequest"
 			},
 			"CreateGroupResponse": {
-				"properties": { "message": { "type": "string", "title": "Message" } },
+				"properties": { "id": { "type": "integer", "title": "Id" } },
 				"type": "object",
-				"required": ["message"],
+				"required": ["id"],
 				"title": "CreateGroupResponse"
 			},
 			"CreateQuizSetRequest": {
@@ -503,6 +547,12 @@
 				"required": ["quiz_sets"],
 				"title": "GetQuizSetsResponse"
 			},
+			"GetScoreResponse": {
+				"properties": { "score": { "type": "integer", "title": "Score" } },
+				"type": "object",
+				"required": ["score"],
+				"title": "GetScoreResponse"
+			},
 			"GroupSchema": {
 				"properties": {
 					"name": { "type": "string", "title": "Name" },
@@ -553,9 +603,13 @@
 				"title": "Questions"
 			},
 			"RegisterScoreRequest": {
-				"properties": { "value": { "type": "integer", "title": "Value" } },
+				"properties": {
+					"valid_num": { "type": "integer", "title": "Valid Num" },
+					"invalid_num": { "type": "integer", "title": "Invalid Num" },
+					"hint_num": { "type": "integer", "title": "Hint Num" }
+				},
 				"type": "object",
-				"required": ["value"],
+				"required": ["valid_num", "invalid_num", "hint_num"],
 				"title": "RegisterScoreRequest"
 			},
 			"RegisterScoreResponse": {
