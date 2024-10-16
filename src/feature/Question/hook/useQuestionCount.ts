@@ -1,26 +1,25 @@
 import { useEffect } from "react";
 
-const useQuizSetCont = (
+const useQuizSetCount = (
 	countTime: number | null,
 	setCountTime: (arg0: number) => void,
-	setQustionIndex: (arg0: (prev: number) => number) => void,
-	timePerQuestion: number,
+	questionIndex: number,
 ) => {
 	useEffect(() => {
 		const countDownInterval = setInterval(() => {
-			if (countTime === 0) {
-				setQustionIndex((prev: number) => prev + 1);
-				setCountTime(timePerQuestion);
-				clearInterval(countDownInterval);
-			}
-			if (countTime && countTime > 0) {
-				setCountTime(countTime - 1);
+			if (countTime !== null) {
+				console.log(countTime);
+				setCountTime(countTime + 1);
 			}
 		}, 1000);
 		return () => {
 			clearInterval(countDownInterval);
 		};
-	}, [countTime, setCountTime, setQustionIndex, timePerQuestion]);
+	}, [countTime, setCountTime]);
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		setCountTime(0);
+	}, [questionIndex, setCountTime]);
 };
 
-export default useQuizSetCont;
+export default useQuizSetCount;

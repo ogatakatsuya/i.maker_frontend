@@ -54,7 +54,7 @@ const QuizSet = () => {
 				</Text>
 			</Box>
 			<Box px={5}>
-				<Heading py={3} as="h1" size="lg" textAlign="left">
+				<Heading p={3} as="h1" size="lg" textAlign="left">
 					{quizSet?.title} 期末追加試験
 				</Heading>
 				<Divider />
@@ -65,7 +65,6 @@ const QuizSet = () => {
 					</Text>
 				</Box>
 				<Divider />
-				<Text>Time Limit: {timeLimit}</Text>
 				{currentQuestion && (
 					<Question
 						questionIndex={questionIndex}

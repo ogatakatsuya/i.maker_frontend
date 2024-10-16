@@ -1,3 +1,3 @@
-export const TimePerQuestion = 120;
+export const TimePerQuestion = 60;
 export const TimeToDisplayHint = 30;
-export const TimePerQuizSet = 600;
+export const TimePerQuizSet = 310;

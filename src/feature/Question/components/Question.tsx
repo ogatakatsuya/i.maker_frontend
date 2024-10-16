@@ -1,8 +1,10 @@
 import { Box, Container, Text } from "@yamada-ui/react";
 import { useState } from "react";
 import type { Questions } from "../../../client/types.gen";
-import { TimePerQuestion, TimeToDisplayHint } from "../../../lib/constants";
+import { TimeToDisplayHint } from "../../../lib/constants";
 import useQuestionCount from "../hook/useQuestionCount";
+import AnswerForm from "./AnswerForm";
+import FinalAnswerForm from "./FinalAnswerForm";
 
 type QuestionProps = {
 	questionIndex: number;
@@ -15,29 +17,42 @@ const Question = ({
 	setQuestionIndex,
 	question,
 }: QuestionProps) => {
-	const [timeLimit, setTimeLimit] = useState(TimePerQuestion);
-	useQuestionCount(timeLimit, setTimeLimit, setQuestionIndex, TimePerQuestion);
+	const [timeLimit, setTimeLimit] = useState(0);
+	useQuestionCount(timeLimit, setTimeLimit, questionIndex);
 
 	return (
 		<Container>
-			<Text>Time Limit: {timeLimit}</Text>
 			<Box>
 				{question.hint ? (
-					<Text fontSize="2xl" textAlign="left">
+					<Text fontSize="2xl" textAlign="left" p={2}>
 						第{questionIndex + 1}問
 					</Text>
 				) : (
-					<Text>最終問題</Text>
+					<Text fontSize="2xl" textAlign="center" p={2}>
+						最終問題
+					</Text>
+				)}
+				<p>{question.content}</p>
+				{questionIndex + 1 !== 5 ? (
+					<AnswerForm
+						answer={question.answers}
+						setQuestionIndex={setQuestionIndex}
+					/>
+				) : (
+					<FinalAnswerForm
+						answer={question.answers}
+						setQuestionIndex={setQuestionIndex}
+					/>
 				)}
 				{question.hint &&
-					(timeLimit <= TimeToDisplayHint ? (
+					(timeLimit >= TimeToDisplayHint ? (
 						<Box>
 							<Text>ヒント：{question.hint}</Text>
 						</Box>
 					) : (
 						<Box>
 							<Text>
-								ヒントは{timeLimit - TimeToDisplayHint}秒後に表示されます
+								ヒントは{TimeToDisplayHint - timeLimit}秒後に表示されます
 							</Text>
 						</Box>
 					))}
