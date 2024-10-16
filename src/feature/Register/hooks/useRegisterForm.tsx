@@ -34,7 +34,7 @@ const useRegisterForm = (quiz_set_id: string | undefined) => {
 		if (response.status === 400) {
 			alert(response.error?.detail);
 		}
-		if (response.data?.message) {
+		if (response.data?.id) {
 			navigation(`/quiz/${quiz_set_id}`);
 		}
 	};
