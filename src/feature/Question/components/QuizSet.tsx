@@ -32,15 +32,20 @@ const QuizSet = () => {
 
 	useEffect(() => {
 		if (quizSet && questionIndex > quizSet.questions.length - 1) {
-			registerScore({
-				body: {
-					valid_num: 4,
-					invalid_num: 2,
-					hint_num: 1,
-				},
-				path: { group_id: sessionStorage.getItem("groupId") },
-			});
-			navigate(`/result/${quiz_set_id}`);
+			const groupId = sessionStorage.getItem("groupId");
+			if (groupId) {
+				registerScore({
+					body: {
+						valid_num: 4,
+						invalid_num: 2,
+						hint_num: 1,
+					},
+					path: { group_id: Number(groupId) }, // Convert to number
+				});
+				navigate(`/result/${quiz_set_id}`);
+			} else {
+				console.error("Group ID not found in session storage");
+			}
 		}
 	}, [questionIndex, quizSet, quiz_set_id, navigate]);
 

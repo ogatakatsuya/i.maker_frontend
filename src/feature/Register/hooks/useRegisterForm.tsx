@@ -34,7 +34,7 @@ const useRegisterForm = (quiz_set_id: string | undefined) => {
 			alert(response.error?.detail);
 		}
 		if (response.data?.id) {
-			sessionStorage.setItem("groupId", response.data.id);
+			sessionStorage.setItem("groupId", String(response.data.id));
 			navigation(`/quiz/${quiz_set_id}`);
 		}
 	};

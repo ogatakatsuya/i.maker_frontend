@@ -6,8 +6,10 @@ const Result = () => {
 	const [score, setScore] = useState<number>(0);
 	useEffect(() => {
 		const fetchScore = async () => {
+			const groupId = sessionStorage.getItem("groupId");
+			if (groupId == null) return;
 			const response = await getScore({
-				path: { group_id: sessionStorage.getItem("groupId") },
+				path: { group_id: Number(groupId) },
 			});
 			if (response.data?.score) {
 				setScore(response.data?.score);
