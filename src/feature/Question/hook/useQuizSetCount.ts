@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { registerScore } from "../../../client/services.gen";
 
 const useQuizSetCont = (
 	countTime: number | null,
@@ -10,6 +11,14 @@ const useQuizSetCont = (
 	useEffect(() => {
 		const countDownInterval = setInterval(() => {
 			if (countTime === 0) {
+				registerScore({
+					body: {
+						valid_num: 4,
+						invalid_num: 2,
+						hint_num: 1,
+					},
+					path: { group_id: sessionStorage.getItem("groupId") },
+				});
 				navigate(`/result/${quiz_set_id}`);
 				clearInterval(countDownInterval);
 			}

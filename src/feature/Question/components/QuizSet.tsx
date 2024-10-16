@@ -2,7 +2,7 @@ import { Box, Divider, Heading, Text, VStack } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getQuizSetBySubId } from "../../../client/services.gen";
+import { getQuizSetBySubId, registerScore } from "../../../client/services.gen";
 import type { GetQuizSetResponse } from "../../../client/types.gen";
 import { TimePerQuizSet } from "../../../lib/constants";
 import useQuizSetCount from "../hook/useQuizSetCount";
@@ -32,6 +32,14 @@ const QuizSet = () => {
 
 	useEffect(() => {
 		if (quizSet && questionIndex > quizSet.questions.length - 1) {
+			registerScore({
+				body: {
+					valid_num: 4,
+					invalid_num: 2,
+					hint_num: 1,
+				},
+				path: { group_id: sessionStorage.getItem("groupId") },
+			});
 			navigate(`/result/${quiz_set_id}`);
 		}
 	}, [questionIndex, quizSet, quiz_set_id, navigate]);

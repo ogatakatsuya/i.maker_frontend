@@ -30,11 +30,11 @@ const useRegisterForm = (quiz_set_id: string | undefined) => {
 			body: request,
 			path: { quiz_set_sub_id: quiz_set_id },
 		});
-		console.log(response);
 		if (response.status === 400) {
 			alert(response.error?.detail);
 		}
 		if (response.data?.id) {
+			sessionStorage.setItem("groupId", response.data.id);
 			navigation(`/quiz/${quiz_set_id}`);
 		}
 	};
