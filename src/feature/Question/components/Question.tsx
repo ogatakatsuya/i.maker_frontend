@@ -18,6 +18,7 @@ const Question = ({
 	question,
 }: QuestionProps) => {
 	const [time, setTime] = useState(0);
+	const [isCorrect, setIsCorrect] = useState(false);
 	useQuestionCount(time, setTime, questionIndex);
 
 	return (
@@ -37,6 +38,7 @@ const Question = ({
 						<AnswerForm
 							answer={question.answers}
 							setQuestionIndex={setQuestionIndex}
+							setIsCorrect={setIsCorrect}
 						/>
 						<Hint
 							hint={question.hint}

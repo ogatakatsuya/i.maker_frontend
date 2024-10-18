@@ -11,13 +11,16 @@ import useAnswerForm from "../hook/useAnswerForm";
 const AnswerForm = ({
 	answer,
 	setQuestionIndex,
+	setIsCorrect,
 }: {
 	answer: Array<Answers>;
 	setQuestionIndex: (arg0: (prev: number) => number) => void;
+	setIsCorrect: (arg0: boolean) => void;
 }) => {
 	const { register, onSubmit, errors } = useAnswerForm(
 		answer,
 		setQuestionIndex,
+		setIsCorrect,
 	);
 	return (
 		<VStack as="form" onSubmit={onSubmit}>

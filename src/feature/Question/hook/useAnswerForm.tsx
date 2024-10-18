@@ -9,6 +9,7 @@ import {
 const useAnswerForm = (
 	answer: Array<Answers>,
 	setQuestionIndex: (arg0: (prev: number) => number) => void,
+	setIsCorrect: (arg0: boolean) => void,
 ) => {
 	const {
 		register,
@@ -24,6 +25,10 @@ const useAnswerForm = (
 			(value) => value.content === data.answer,
 		);
 		if (isAnswerCorrect) {
+			setIsCorrect(true);
+			setTimeout(() => {
+				setIsCorrect(false);
+			}, 2000);
 			reset();
 			setQuestionIndex((prev) => prev + 1);
 		} else {

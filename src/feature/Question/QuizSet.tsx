@@ -31,22 +31,27 @@ const QuizSet = () => {
 	}, [quiz_set_id]);
 
 	useEffect(() => {
-		if (quizSet && questionIndex > quizSet.questions.length - 1) {
-			const groupId = sessionStorage.getItem("groupId");
-			if (groupId) {
-				registerScore({
-					body: {
-						valid_num: 4,
-						invalid_num: 2,
-						hint_num: 1,
-					},
-					path: { group_id: Number(groupId) }, // Convert to number
-				});
-				navigate(`/result/${quiz_set_id}`);
-			} else {
-				console.error("Group ID not found in session storage");
+		const questionHandler = async () => {
+			if (quizSet && questionIndex > quizSet.questions.length - 1) {
+				const groupId = sessionStorage.getItem("groupId");
+				if (groupId) {
+					const response = await registerScore({
+						body: {
+							valid_num: 4,
+							invalid_num: 2,
+							hint_num: 1,
+						},
+						path: { group_id: Number(groupId) },
+					});
+					if (response.data?.message) {
+						navigate(`/result/${quiz_set_id}`);
+					}
+				} else {
+					console.error("Group ID not found in session storage");
+				}
 			}
-		}
+		};
+		questionHandler();
 	}, [questionIndex, quizSet, quiz_set_id, navigate]);
 
 	const currentQuestion = quizSet?.questions[questionIndex];
