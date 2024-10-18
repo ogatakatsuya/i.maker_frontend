@@ -10,15 +10,18 @@ type QuestionProps = {
 	questionIndex: number;
 	setQuestionIndex: (arg0: (prev: number) => number) => void;
 	question: Questions;
+	setIsCorrect: (arg0: boolean) => void;
+	setIsIncorrect: (arg0: boolean) => void;
 };
 
 const Question = ({
 	questionIndex,
 	setQuestionIndex,
 	question,
+	setIsCorrect,
+	setIsIncorrect,
 }: QuestionProps) => {
 	const [time, setTime] = useState(0);
-	const [isCorrect, setIsCorrect] = useState(false);
 	useQuestionCount(time, setTime, questionIndex);
 
 	return (
@@ -39,6 +42,7 @@ const Question = ({
 							answer={question.answers}
 							setQuestionIndex={setQuestionIndex}
 							setIsCorrect={setIsCorrect}
+							setIsIncorrect={setIsIncorrect}
 						/>
 						<Hint
 							hint={question.hint}
