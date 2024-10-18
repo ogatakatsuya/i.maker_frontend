@@ -32,7 +32,7 @@ const Question = ({
 						最終問題
 					</Text>
 				)}
-				{questionIndex + 1 !== 5 ? (
+				{question.hint ? (
 					<Box>
 						<AnswerForm
 							answer={question.answers}
