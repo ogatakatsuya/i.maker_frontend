@@ -8,7 +8,6 @@ const useQuizSetCount = (
 	useEffect(() => {
 		const countDownInterval = setInterval(() => {
 			if (countTime !== null) {
-				console.log(countTime);
 				setCountTime(countTime + 1);
 			}
 		}, 1000);

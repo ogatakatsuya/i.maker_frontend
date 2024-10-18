@@ -2,11 +2,11 @@ import { Box, Divider, Heading, Text, VStack } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getQuizSetBySubId, registerScore } from "../../../client/services.gen";
-import type { GetQuizSetResponse } from "../../../client/types.gen";
-import { TimePerQuizSet } from "../../../lib/constants";
-import useQuizSetCount from "../hook/useQuizSetCount";
-import Question from "./Question";
+import { getQuizSetBySubId, registerScore } from "../../client/services.gen";
+import type { GetQuizSetResponse } from "../../client/types.gen";
+import { TimePerQuizSet } from "../../lib/constants";
+import Question from "./components/Question";
+import useQuizSetCount from "./hook/useQuizSetCount";
 
 const QuizSet = () => {
 	const { quiz_set_id } = useParams<{ quiz_set_id: string | undefined }>();
@@ -74,7 +74,7 @@ const QuizSet = () => {
 				<Box textAlign="left" p={3}>
 					<Text as="b">課題コンテンツ</Text>
 					<Text fontSize="sm">
-						配った問題の解答を記入してください。他チームとの協働は厳禁です。発見次第報告させていただいます。
+						配った問題の解答を記入してください。他チームとの協働は厳禁です。発見次第報告させていただきます。
 					</Text>
 				</Box>
 				<Divider />

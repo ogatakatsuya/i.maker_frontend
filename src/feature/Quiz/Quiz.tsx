@@ -5,19 +5,19 @@ import {
 	Grid,
 	GridItem,
 	Heading,
+	Icon,
 	ListItem,
 	Text,
 	VStack,
 } from "@yamada-ui/react";
-import { Icon } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { SlCalender } from "react-icons/sl";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getQuizSetBySubId } from "../../../client/services.gen";
-import type { GetQuizSetResponse } from "../../../client/types.gen";
-import CustomButton from "./CustomButton";
+import { getQuizSetBySubId } from "../../client/services.gen";
+import type { GetQuizSetResponse } from "../../client/types.gen";
+import CustomButton from "./components/CustomButton";
 
 const Quiz = () => {
 	const { quiz_set_id } = useParams<{ quiz_set_id: string | undefined }>();
@@ -48,8 +48,16 @@ const Quiz = () => {
 	return (
 		<Box w="full" minHeight="100vh">
 			<VStack>
-				<Box bg="gray.700" textAlign="left">
-					<Text my={1} ml={2} color="white">
+				<Box
+					bg="gray.600"
+					textAlign="left"
+					height="40px"
+					display="flex"
+					alignItems="center"
+					justifyContent="left"
+					fontSize="xl"
+				>
+					<Text color="white" as="b" pl={4}>
 						{quizSet?.title}
 					</Text>
 				</Box>
