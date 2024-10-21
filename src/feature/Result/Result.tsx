@@ -4,6 +4,8 @@ import {
 	Divider,
 	HStack,
 	Icon,
+	Image,
+	Loading,
 	Text,
 	VStack,
 } from "@yamada-ui/react";
@@ -13,7 +15,8 @@ import { getScore } from "../../client/services.gen";
 import { FeedBack, type FeedBackEntry } from "../../lib/constants";
 
 const Result = () => {
-	const [score, setScore] = useState<number>(0);
+	const [score, setScore] = useState<number | null>(null);
+	const [nickName, setNickName] = useState<string | null>(null);
 	const [feedback, setFeedback] = useState<FeedBackEntry>();
 	useEffect(() => {
 		const fetchScore = async () => {
@@ -24,16 +27,19 @@ const Result = () => {
 				});
 				if (response.data?.score) {
 					setScore(response.data?.score);
-					if (score >= 90) {
-						setFeedback(FeedBack.S);
-					} else if (score >= 80) {
-						setFeedback(FeedBack.A);
-					} else if (score >= 70) {
-						setFeedback(FeedBack.B);
-					} else if (score >= 60) {
-						setFeedback(FeedBack.C);
-					} else {
-						setFeedback(FeedBack.F);
+					setNickName(response.data?.name);
+					if (score != null) {
+						if (score >= 90) {
+							setFeedback(FeedBack.S);
+						} else if (score >= 80) {
+							setFeedback(FeedBack.A);
+						} else if (score >= 70) {
+							setFeedback(FeedBack.B);
+						} else if (score >= 60) {
+							setFeedback(FeedBack.C);
+						} else {
+							setFeedback(FeedBack.F);
+						}
 					}
 				}
 			}
@@ -57,44 +63,70 @@ const Result = () => {
 					</Text>
 				</Box>
 			</VStack>
-			<Box>
-				<HStack
-					textAlign="center"
-					alignItems="center"
+			{score === null ? (
+				<Box
+					display="flex"
 					justifyContent="center"
-					p={4}
-				>
-					<Avatar />
-					<Text fontSize="xl">ニックネーム</Text>
-				</HStack>
-				<Divider />
-				<HStack
-					textAlign="center"
 					alignItems="center"
-					justifyContent="center"
-					p={4}
+					minHeight="100vh"
 				>
-					<Icon as={IoMdCheckboxOutline} w={9} h={9} />
-					<Text as="b">期末試験 追試</Text>
-
-					<Box borderRadius="lg" bg="blue.300">
-						<Text p={2} color="black">
-							{score} / 100
-						</Text>
-					</Box>
-				</HStack>
+					<Loading size="xl" color="blue.500" />
+				</Box>
+			) : (
 				<Box>
-					<Text>{feedback?.credits}</Text>
-					<Box textAlign="left" px={4}>
-						<Text fontSize="xl" as="b">
-							コメント
-						</Text>
-					</Box>
-					<Box mx={4} p={4} border="2px solid black">
-						<Text>{feedback?.comment}</Text>
+					<HStack
+						textAlign="center"
+						alignItems="center"
+						justifyContent="center"
+						p={2}
+					>
+						<Avatar />
+						<Text fontSize="lg">{nickName}</Text>
+					</HStack>
+					<Divider />
+					<HStack
+						textAlign="center"
+						alignItems="center"
+						justifyContent="center"
+						p={2}
+					>
+						<Icon as={IoMdCheckboxOutline} w={9} h={9} />
+						<Text as="b">期末試験 追試</Text>
+
+						<Box borderRadius="lg" bg="blue.300">
+							<Text p={2} color="black">
+								{score} / 100
+							</Text>
+						</Box>
+					</HStack>
+					<Box>
+						<Image
+							src={feedback?.image}
+							fallback="https://via.placeholder.com/512"
+							fallbackStrategy="onError"
+							maxWidth="100%"
+							height="auto"
+							objectFit="contain"
+							className="logo"
+						/>
+						<Box textAlign="left" px={4}>
+							<Text fontSize="xl" as="b">
+								コメント
+							</Text>
+						</Box>
+						<Box mx={4} p={4} border="2px solid black" fontSize="sm">
+							<Text>{feedback?.comment}</Text>
+						</Box>
+						<Box p={2}>
+							<Text as="b">
+								解答完了後はTAの指示に従ってください。
+								<br />
+								試験お疲れ様でした。
+							</Text>
+						</Box>
 					</Box>
 				</Box>
-			</Box>
+			)}
 		</Box>
 	);
 };

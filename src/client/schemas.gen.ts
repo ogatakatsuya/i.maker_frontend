@@ -213,9 +213,13 @@ export const GetScoreResponseSchema = {
 			type: "integer",
 			title: "Score",
 		},
+		name: {
+			type: "string",
+			title: "Name",
+		},
 	},
 	type: "object",
-	required: ["score"],
+	required: ["score", "name"],
 	title: "GetScoreResponse",
 } as const;
 
@@ -301,21 +305,30 @@ export const QuestionsSchema = {
 
 export const RegisterScoreRequestSchema = {
 	properties: {
-		valid_num: {
+		correct_num: {
 			type: "integer",
-			title: "Valid Num",
+			title: "Correct Num",
 		},
-		invalid_num: {
+		incorrect_answers_num: {
 			type: "integer",
-			title: "Invalid Num",
+			title: "Incorrect Answers Num",
 		},
-		hint_num: {
+		showed_hint_num: {
 			type: "integer",
-			title: "Hint Num",
+			title: "Showed Hint Num",
+		},
+		is_time_over: {
+			type: "boolean",
+			title: "Is Time Over",
 		},
 	},
 	type: "object",
-	required: ["valid_num", "invalid_num", "hint_num"],
+	required: [
+		"correct_num",
+		"incorrect_answers_num",
+		"showed_hint_num",
+		"is_time_over",
+	],
 	title: "RegisterScoreRequest",
 } as const;
 

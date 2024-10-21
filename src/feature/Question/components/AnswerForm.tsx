@@ -13,17 +13,20 @@ const AnswerForm = ({
 	setQuestionIndex,
 	setIsCorrect,
 	setIsIncorrect,
+	setMissingNum,
 }: {
 	answer: Array<Answers>;
 	setQuestionIndex: (arg0: (prev: number) => number) => void;
 	setIsCorrect: (arg0: boolean) => void;
 	setIsIncorrect: (arg: boolean) => void;
+	setMissingNum: (arg: (prev: number) => number) => void;
 }) => {
 	const { register, onSubmit, errors } = useAnswerForm(
 		answer,
 		setQuestionIndex,
 		setIsCorrect,
 		setIsIncorrect,
+		setMissingNum,
 	);
 	return (
 		<VStack as="form" onSubmit={onSubmit}>

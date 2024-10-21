@@ -1,11 +1,30 @@
 import { Box, Text } from "@yamada-ui/react";
+import { useEffect, useState } from "react";
 import { TimeToDisplayHint } from "../../../lib/constants";
 
 const Hint = ({
 	hint,
 	questionIndex,
 	time,
-}: { hint: string; questionIndex: number; time: number }) => {
+	setHintNum,
+}: {
+	hint: string;
+	questionIndex: number;
+	time: number;
+	setHintNum: (arg: (prev: number) => number) => void;
+}) => {
+	const [showHint, setShowHint] = useState<boolean>(false);
+	useEffect(() => {
+		if (!showHint && time > TimeToDisplayHint[questionIndex]) {
+			setShowHint(true);
+			setHintNum((prev) => prev + 1);
+		}
+	}, [questionIndex, setHintNum, showHint, time]);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		setShowHint(false);
+	}, [questionIndex]);
 	return (
 		<Box py={4}>
 			<Box
@@ -19,7 +38,7 @@ const Hint = ({
 				textAlign="center"
 				borderRadius="lg"
 			>
-				{time < TimeToDisplayHint[questionIndex] ? (
+				{!showHint ? (
 					<Box>
 						<Text as="b" fontSize="2xl">
 							ヒント
@@ -32,7 +51,7 @@ const Hint = ({
 					</Box>
 				)}
 			</Box>
-			{time < TimeToDisplayHint[questionIndex] && (
+			{!showHint && (
 				<Box p={2}>
 					<Text color="#05397f" as="b" fontSize="lg">
 						ヒントは{TimeToDisplayHint[questionIndex] - time}

@@ -548,9 +548,12 @@
 				"title": "GetQuizSetsResponse"
 			},
 			"GetScoreResponse": {
-				"properties": { "score": { "type": "integer", "title": "Score" } },
+				"properties": {
+					"score": { "type": "integer", "title": "Score" },
+					"name": { "type": "string", "title": "Name" }
+				},
 				"type": "object",
-				"required": ["score"],
+				"required": ["score", "name"],
 				"title": "GetScoreResponse"
 			},
 			"GroupSchema": {
@@ -604,12 +607,21 @@
 			},
 			"RegisterScoreRequest": {
 				"properties": {
-					"valid_num": { "type": "integer", "title": "Valid Num" },
-					"invalid_num": { "type": "integer", "title": "Invalid Num" },
-					"hint_num": { "type": "integer", "title": "Hint Num" }
+					"correct_num": { "type": "integer", "title": "Correct Num" },
+					"incorrect_answers_num": {
+						"type": "integer",
+						"title": "Incorrect Answers Num"
+					},
+					"showed_hint_num": { "type": "integer", "title": "Showed Hint Num" },
+					"is_time_over": { "type": "boolean", "title": "Is Time Over" }
 				},
 				"type": "object",
-				"required": ["valid_num", "invalid_num", "hint_num"],
+				"required": [
+					"correct_num",
+					"incorrect_answers_num",
+					"showed_hint_num",
+					"is_time_over"
+				],
 				"title": "RegisterScoreRequest"
 			},
 			"RegisterScoreResponse": {

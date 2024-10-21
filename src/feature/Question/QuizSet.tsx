@@ -17,8 +17,17 @@ const QuizSet = () => {
 	const [timeLimit, setTimeLimit] = useState(TimePerQuizSet);
 	const [isCorrect, setIsCorrect] = useState(false);
 	const [isIncorrect, setIsIncorrect] = useState(false);
+	const [missingNum, setMissingNum] = useState<number>(0);
+	const [hintNum, setHintNum] = useState<number>(0);
 	const navigate = useNavigate();
-	useQuizSetCount(timeLimit, setTimeLimit, quiz_set_id);
+	useQuizSetCount(
+		timeLimit,
+		setTimeLimit,
+		quiz_set_id,
+		questionIndex,
+		missingNum,
+		hintNum,
+	);
 
 	useEffect(() => {
 		const fetchQuizSet = async () => {
@@ -35,15 +44,22 @@ const QuizSet = () => {
 	}, [quiz_set_id]);
 
 	useEffect(() => {
+		console.log("missingNum", missingNum);
+		console.log("hintNum", hintNum);
+	}, [missingNum, hintNum]);
+
+	useEffect(() => {
 		const questionHandler = async () => {
 			if (quizSet && questionIndex > quizSet.questions.length - 1) {
 				const groupId = sessionStorage.getItem("groupId");
 				if (groupId) {
+					const isTimeOver = timeLimit < 60;
 					const response = await registerScore({
 						body: {
-							valid_num: 4,
-							invalid_num: 2,
-							hint_num: 1,
+							correct_num: questionIndex,
+							incorrect_answers_num: missingNum,
+							showed_hint_num: hintNum,
+							is_time_over: isTimeOver,
 						},
 						path: { group_id: Number(groupId) },
 					});
@@ -56,7 +72,15 @@ const QuizSet = () => {
 			}
 		};
 		questionHandler();
-	}, [questionIndex, quizSet, quiz_set_id, navigate]);
+	}, [
+		questionIndex,
+		quizSet,
+		quiz_set_id,
+		navigate,
+		timeLimit,
+		missingNum,
+		hintNum,
+	]);
 
 	const currentQuestion = quizSet?.questions[questionIndex];
 
@@ -125,6 +149,8 @@ const QuizSet = () => {
 								question={currentQuestion}
 								setIsCorrect={setIsCorrect}
 								setIsIncorrect={setIsIncorrect}
+								setMissingNum={setMissingNum}
+								setHintNum={setHintNum}
 							/>
 						)}
 					</Box>

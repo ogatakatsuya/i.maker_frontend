@@ -62,6 +62,7 @@ export type GetQuizSetsResponse = {
 
 export type GetScoreResponse = {
 	score: number;
+	name: string;
 };
 
 export type GroupSchema = {
@@ -85,9 +86,10 @@ export type Questions = {
 };
 
 export type RegisterScoreRequest = {
-	valid_num: number;
-	invalid_num: number;
-	hint_num: number;
+	correct_num: number;
+	incorrect_answers_num: number;
+	showed_hint_num: number;
+	is_time_over: boolean;
 };
 
 export type RegisterScoreResponse = {

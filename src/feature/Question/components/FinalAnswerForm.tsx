@@ -11,13 +11,19 @@ import useFinalAnswer from "../hook/useFainalAnswer";
 const FinalAnswerForm = ({
 	answer,
 	setQuestionIndex,
+	setIsCorrect,
+	setIsIncorrect,
 }: {
 	answer: Array<Answers>;
 	setQuestionIndex: (arg0: (prev: number) => number) => void;
+	setIsCorrect: (arg: boolean) => void;
+	setIsIncorrect: (arg: boolean) => void;
 }) => {
 	const { register, onSubmit, errors } = useFinalAnswer(
 		answer,
 		setQuestionIndex,
+		setIsCorrect,
+		setIsIncorrect,
 	);
 	return (
 		<VStack as="form" onSubmit={onSubmit}>

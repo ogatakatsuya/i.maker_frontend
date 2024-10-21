@@ -11,6 +11,7 @@ const useAnswerForm = (
 	setQuestionIndex: (arg0: (prev: number) => number) => void,
 	setIsCorrect: (arg0: boolean) => void,
 	setIsIncorrect: (arg0: boolean) => void,
+	setMissingNum: (arg: (prev: number) => number) => void,
 ) => {
 	const {
 		register,
@@ -29,10 +30,11 @@ const useAnswerForm = (
 			setIsCorrect(true);
 			setTimeout(() => {
 				setIsCorrect(false);
+				setQuestionIndex((prev) => prev + 1);
 			}, 1000);
 			reset();
-			setQuestionIndex((prev) => prev + 1);
 		} else {
+			setMissingNum((prev) => prev + 1);
 			setIsIncorrect(true);
 			setTimeout(() => {
 				setIsIncorrect(false);

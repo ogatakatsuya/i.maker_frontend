@@ -6,6 +6,9 @@ const useQuizSetCont = (
 	countTime: number | null,
 	setCountTime: (arg0: number) => void,
 	quiz_set_id: string | undefined,
+	questionIndex: number,
+	missingNum: number,
+	hintNum: number,
 ) => {
 	const navigate = useNavigate();
 	useEffect(() => {
@@ -15,9 +18,10 @@ const useQuizSetCont = (
 				if (groupId == null) return;
 				registerScore({
 					body: {
-						valid_num: 4,
-						invalid_num: 2,
-						hint_num: 1,
+						correct_num: questionIndex,
+						incorrect_answers_num: missingNum,
+						showed_hint_num: hintNum,
+						is_time_over: true,
 					},
 					path: { group_id: Number(groupId) },
 				});
@@ -31,7 +35,15 @@ const useQuizSetCont = (
 		return () => {
 			clearInterval(countDownInterval);
 		};
-	}, [countTime, setCountTime, quiz_set_id, navigate]);
+	}, [
+		countTime,
+		setCountTime,
+		quiz_set_id,
+		navigate,
+		questionIndex,
+		missingNum,
+		hintNum,
+	]);
 };
 
 export default useQuizSetCont;

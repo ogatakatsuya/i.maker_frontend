@@ -12,6 +12,8 @@ type QuestionProps = {
 	question: Questions;
 	setIsCorrect: (arg0: boolean) => void;
 	setIsIncorrect: (arg0: boolean) => void;
+	setMissingNum: (arg: (prev: number) => number) => void;
+	setHintNum: (arg: (prev: number) => number) => void;
 };
 
 const Question = ({
@@ -20,6 +22,8 @@ const Question = ({
 	question,
 	setIsCorrect,
 	setIsIncorrect,
+	setMissingNum,
+	setHintNum,
 }: QuestionProps) => {
 	const [time, setTime] = useState(0);
 	useQuestionCount(time, setTime, questionIndex);
@@ -43,17 +47,21 @@ const Question = ({
 							setQuestionIndex={setQuestionIndex}
 							setIsCorrect={setIsCorrect}
 							setIsIncorrect={setIsIncorrect}
+							setMissingNum={setMissingNum}
 						/>
 						<Hint
 							hint={question.hint}
 							questionIndex={questionIndex}
 							time={time}
+							setHintNum={setHintNum}
 						/>
 					</Box>
 				) : (
 					<FinalAnswerForm
 						answer={question.answers}
 						setQuestionIndex={setQuestionIndex}
+						setIsCorrect={setIsCorrect}
+						setIsIncorrect={setIsIncorrect}
 					/>
 				)}
 			</Box>
