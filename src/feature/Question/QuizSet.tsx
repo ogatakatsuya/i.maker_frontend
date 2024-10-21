@@ -44,11 +44,6 @@ const QuizSet = () => {
 	}, [quiz_set_id]);
 
 	useEffect(() => {
-		console.log("missingNum", missingNum);
-		console.log("hintNum", hintNum);
-	}, [missingNum, hintNum]);
-
-	useEffect(() => {
 		const questionHandler = async () => {
 			if (quizSet && questionIndex > quizSet.questions.length - 1) {
 				const groupId = sessionStorage.getItem("groupId");

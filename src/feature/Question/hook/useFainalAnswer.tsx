@@ -47,7 +47,6 @@ const useAnswerForm = (
 			setTimeout(() => {
 				setIsIncorrect(false);
 			}, 1000);
-			console.log("Missing answers:", missingAnswers);
 		} else {
 			setIsCorrect(true);
 			setTimeout(() => {
