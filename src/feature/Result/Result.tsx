@@ -117,7 +117,7 @@ const Result = () => {
 						<Box mx={4} p={4} border="2px solid black" fontSize="sm">
 							<Text>{feedback?.comment}</Text>
 						</Box>
-						<Box p={2}>
+						<Box p={6}>
 							<Text as="b">
 								解答完了後はTAの指示に従ってください。
 								<br />
