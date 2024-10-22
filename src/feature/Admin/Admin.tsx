@@ -69,6 +69,34 @@ const Admin = () => {
 
 	return (
 		<Box maxW="800px" mx="auto" p={4}>
+			<Heading as="h2" size="xl" mt={6} textAlign="center">
+				問題セットを追加する
+			</Heading>
+			<VStack p={6} as="form" onSubmit={handleSubmit(onSubmit)}>
+				<FormControl label="タイトル" isInvalid={!!errors.title}>
+					<Input
+						placeholder="問題セットのタイトルを入力してください"
+						{...register("title", {
+							required: { value: true, message: "タイトルは必須です" },
+						})}
+					/>
+					{errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
+				</FormControl>
+
+				<FormControl label="説明文" isInvalid={!!errors.description}>
+					<Textarea
+						placeholder="問題セットの説明文を入力してください"
+						{...register("description", {
+							required: { value: true, message: "説明文は必須です" },
+						})}
+					/>
+					{errors.description && (
+						<ErrorMessage>{errors.description.message}</ErrorMessage>
+					)}
+				</FormControl>
+
+				<Button type="submit">追加</Button>
+			</VStack>
 			<Heading as="h2" size="xl" mb={6} textAlign="center">
 				問題セット一覧
 			</Heading>
@@ -94,34 +122,6 @@ const Admin = () => {
 						</ListItem>
 					))}
 				</List>
-			</VStack>
-			<Heading as="h2" size="xl" mt={6} textAlign="center">
-				問題セットを追加する
-			</Heading>
-			<VStack p={6} as="form" onSubmit={handleSubmit(onSubmit)}>
-				<FormControl label="タイトル" isInvalid={!!errors.title}>
-					<Input
-						placeholder="問題セットのタイトルを入力してください。"
-						{...register("title", {
-							required: { value: true, message: "タイトルは必須です。" },
-						})}
-					/>
-					{errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
-				</FormControl>
-
-				<FormControl label="説明文" isInvalid={!!errors.description}>
-					<Textarea
-						placeholder="問題セットの説明文を入力してください"
-						{...register("description", {
-							required: { value: true, message: "説明文は必須です。" },
-						})}
-					/>
-					{errors.description && (
-						<ErrorMessage>{errors.description.message}</ErrorMessage>
-					)}
-				</FormControl>
-
-				<Button type="submit">追加</Button>
 			</VStack>
 		</Box>
 	);

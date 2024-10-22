@@ -1,5 +1,6 @@
 import type { RouteObject } from "react-router-dom";
 import QuizIndex from "./components/QuizIndex";
+import AddQuestionForm from "./feature/AddQuestion/AddQuestionForm";
 import Admin from "./feature/Admin/Admin";
 import Home from "./feature/Home/Home";
 import QuizSet from "./feature/Question/QuizSet";
@@ -19,6 +20,10 @@ const routes: RouteObject[] = [
 			{ path: "/result/:quiz_set_id", element: <Result /> },
 			{ path: "/admin/i.maker/e53f4181", element: <Admin /> },
 			{ path: "/admin/i.maker/e53f4181/:quiz_set_id", element: <QuizEditer /> },
+			{
+				path: "/admin/i.maker/e53f4181/create/:quiz_set_id",
+				element: <AddQuestionForm />,
+			},
 		],
 	},
 ];
