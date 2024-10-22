@@ -10,18 +10,14 @@ import {
 	Text,
 	VStack,
 } from "@yamada-ui/react";
-import { useEffect, useState } from "react";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { SlCalender } from "react-icons/sl";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getQuizSetBySubId } from "../../client/services.gen";
-import type { GetQuizSetResponse } from "../../client/types.gen";
 import CustomButton from "./components/CustomButton";
 
 const Quiz = () => {
 	const { quiz_set_id } = useParams<{ quiz_set_id: string | undefined }>();
-	const [quizSet, setQuizSet] = useState<GetQuizSetResponse | null>(null);
 	const navigation = useNavigate();
 	const warningList = [
 		"テストは静かな場所で受けてください。",
@@ -30,20 +26,6 @@ const Quiz = () => {
 		"試験用紙は丁寧に扱ってください。",
 		"不明な点があれば、試験監督に質問してください。",
 	];
-
-	useEffect(() => {
-		const fetchQuizSet = async () => {
-			if (quiz_set_id) {
-				const response = await getQuizSetBySubId({
-					path: { sub_id: quiz_set_id },
-				});
-				if (response.data) {
-					setQuizSet(response.data);
-				}
-			}
-		};
-		fetchQuizSet();
-	}, [quiz_set_id]);
 
 	return (
 		<Box w="full" minHeight="100vh">
