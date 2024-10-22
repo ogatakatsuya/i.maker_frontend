@@ -61,15 +61,21 @@ const AddQuestionForm = () => {
 	return (
 		<Box p={6}>
 			<Heading>問題を追加する</Heading>
-			<Text as="b">注意事項</Text>
+			<Box p={6}>
+				<Text as="b">注意事項</Text>
+			</Box>
 			<List>
 				<ListItem>一度作成した問題・解答は削除できません。</ListItem>
 				<ListItem>最終問題のヒントは必ず空欄にしてください。</ListItem>
+				<ListItem>解答はカンマ(,)区切りで入力してください。</ListItem>
 				<ListItem>
 					問題の順序は作成した順序になります。（最終問題は必ず4つ目に作成してください。）
 				</ListItem>
 				<ListItem>
 					問題内容は表示されないので、適当で良いです。識別できるようにわかりやすい名前をつけてください。
+				</ListItem>
+				<ListItem>
+					問題は4つ以上作れてしまいますが、絶対に4つ以上の問題を追加しないでください。
 				</ListItem>
 			</List>
 			<VStack
@@ -79,7 +85,7 @@ const AddQuestionForm = () => {
 				maxWidth="800px"
 				mx="auto"
 			>
-				<FormControl label="問題の内容" isRequired isInvalid={!!errors.content}>
+				<FormControl label="問題の内容" isInvalid={!!errors.content}>
 					<Textarea
 						placeholder="問題の内容を入力してください。"
 						{...register("content", { required: "内容は必須です。" })}
@@ -95,11 +101,11 @@ const AddQuestionForm = () => {
 				</FormControl>
 				<Text color="red.500">{errors.hint?.message}</Text>
 
-				<FormControl label="回答" isRequired isInvalid={!!errors.answers}>
+				<FormControl label="解答" isInvalid={!!errors.answers}>
 					<Textarea
-						placeholder="回答をカンマ区切りで入力してください。"
+						placeholder="解答をカンマ区切りで入力してください。"
 						{...register("answers", {
-							required: "回答は必須です。",
+							required: "解答は必須です。",
 						})}
 					/>
 				</FormControl>
