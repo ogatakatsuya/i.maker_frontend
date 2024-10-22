@@ -98,7 +98,7 @@ const QuizSet = () => {
 				)}
 				{isIncorrect && (
 					<Image
-						src={incorrectImage} // 不正解の画像のパスを指定
+						src={incorrectImage}
 						fallback="https://via.placeholder.com/512"
 						fallbackStrategy="onError"
 						maxWidth="100%"
@@ -127,7 +127,7 @@ const QuizSet = () => {
 					</Box>
 					<Box px={5}>
 						<Heading p={3} as="h1" size="lg" textAlign="left">
-							{quizSet?.title} 期末追加試験
+							{questionIndex === 3 ? "謎解き概論l" : "謎解き概論I"} 期末追加試験
 						</Heading>
 						<Divider />
 						<Box textAlign="left" p={3}>

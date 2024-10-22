@@ -58,7 +58,7 @@ const Quiz = () => {
 					fontSize="xl"
 				>
 					<Text color="white" as="b" pl={4}>
-						{quizSet?.title}
+						謎解き概論I
 					</Text>
 				</Box>
 				<Box textAlign="left" pl={4}>
