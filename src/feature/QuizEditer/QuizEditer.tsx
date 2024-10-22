@@ -15,16 +15,22 @@ import {
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getQuizSet } from "../../client/services.gen";
-import type { GetQuizSetResponse } from "../../client/types.gen";
+import { getGroupsByQuizSetId, getQuizSet } from "../../client/services.gen";
+import type {
+	GetGroupsByQuizSetIdResponse,
+	GetQuizSetResponse,
+} from "../../client/types.gen";
 
 const QuizEditor = () => {
 	const { quiz_set_id } = useParams<{ quiz_set_id: string | undefined }>();
 	const [quizSet, setQuizSet] = useState<GetQuizSetResponse | null>(null);
+	const [groups, setGroups] = useState<GetGroupsByQuizSetIdResponse | null>(
+		null,
+	);
 	const navigater = useNavigate();
 
 	useEffect(() => {
-		const fetchData = async () => {
+		const fetchQuizData = async () => {
 			if (quiz_set_id) {
 				const response = await getQuizSet({
 					path: {
@@ -38,13 +44,29 @@ const QuizEditor = () => {
 				}
 			}
 		};
-		fetchData();
+		const fetchGroupData = async () => {
+			if (quiz_set_id) {
+				const groupResponse = await getGroupsByQuizSetId({
+					path: {
+						quiz_set_id: Number(quiz_set_id),
+					},
+				});
+				if (groupResponse.status === 200 && groupResponse.data) {
+					setGroups(groupResponse.data);
+				}
+			}
+		};
+		fetchQuizData();
+		fetchGroupData();
 	}, [quiz_set_id]);
 
 	return (
 		<Box p={6}>
 			<Heading as="h2" size="xl" mb={6} textAlign="center">
 				編集画面
+			</Heading>
+			<Heading size="md" mb={4}>
+				問題の詳細情報
 			</Heading>
 			{quizSet ? (
 				<>
@@ -105,9 +127,43 @@ const QuizEditor = () => {
 				onClick={() =>
 					navigater(`/admin/i.maker/e53f4181/create/${quiz_set_id}`)
 				}
+				colorScheme="teal"
+				mb={6}
 			>
 				問題を追加する
 			</Button>
+			<Box mb={6}>
+				<Heading size="md" mb={4}>
+					参加したグループ情報
+				</Heading>
+				{groups && groups.groups.length > 0 ? (
+					<TableContainer maxWidth="800px" overflowX="auto" mx="auto">
+						<NativeTable variant="striped">
+							<TableCaption>グループの詳細</TableCaption>
+							<Thead>
+								<Tr>
+									<Th>グループ名</Th>
+									<Th>メンバー数</Th>
+									<Th>スコア</Th>
+									<Th>プレイ日時</Th>
+								</Tr>
+							</Thead>
+							<Tbody>
+								{groups.groups.map((group) => (
+									<Tr key={group.id}>
+										<Td>{group.name}</Td>
+										<Td>{group.member_num}</Td>
+										<Td>{group.score !== null ? group.score : "未プレイ"}</Td>
+										<Td>{new Date(group.played_at).toLocaleString()}</Td>
+									</Tr>
+								))}
+							</Tbody>
+						</NativeTable>
+					</TableContainer>
+				) : (
+					<Text>グループ情報がありません。</Text>
+				)}
+			</Box>
 		</Box>
 	);
 };
