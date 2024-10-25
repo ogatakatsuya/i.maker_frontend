@@ -47,7 +47,7 @@ const Hint = ({
 				) : (
 					<Box>
 						<Text as="b">ヒント</Text>
-						<Text>{hint}</Text>
+						<Text fontSize="md">{hint}</Text>
 					</Box>
 				)}
 			</Box>
