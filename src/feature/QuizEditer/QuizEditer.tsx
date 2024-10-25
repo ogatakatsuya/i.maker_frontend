@@ -88,7 +88,7 @@ const QuizEditor = () => {
 											<Th>問題番号</Th>
 											<Th>内容</Th>
 											<Th>ヒント</Th>
-											<Th>回答</Th>
+											<Th>解答</Th>
 										</Tr>
 									</Thead>
 									<Tbody>
