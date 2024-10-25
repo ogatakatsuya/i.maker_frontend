@@ -79,11 +79,16 @@ const Quiz = () => {
 					</Grid>
 					<Divider />
 					<Heading py={4}>注意事項</Heading>
-					<DecimalList>
+					<DecimalList pr={1}>
+						<ListItem>
+							<Text color="red.500" fontSize="sm">
+								問題を開始したら、終了するまで絶対にページをリロードしたり、他のページに遷移しないでください。
+							</Text>
+						</ListItem>
 						{warningList.map((warning, index) => (
 							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 							<ListItem key={index}>
-								<Text>{warning}</Text>
+								<Text fontSize="sm">{warning}</Text>
 							</ListItem>
 						))}
 					</DecimalList>
