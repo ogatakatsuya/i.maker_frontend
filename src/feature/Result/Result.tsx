@@ -64,14 +64,16 @@ const Result = () => {
 				</Box>
 			</VStack>
 			{score === null ? (
-				<Box
-					display="flex"
-					justifyContent="center"
-					alignItems="center"
-					minHeight="100vh"
-				>
-					<Loading size="xl" color="blue.500" />
-				</Box>
+				<VStack>
+					<Text as="b" p={4}>
+						もしローディング画面が10秒以上続く場合は
+						<br />
+						ページを更新してください。
+					</Text>
+					<Box display="flex" justifyContent="center" alignItems="center">
+						<Loading size="xl" color="blue.500" />
+					</Box>
+				</VStack>
 			) : (
 				<Box>
 					<HStack
