@@ -10,7 +10,7 @@ export type FeedBackEntry = {
 	image: string;
 };
 
-export const TimeToDisplayHint: number[] = [18, 120, 270];
+export const TimeToDisplayHint: number[] = [180, 120, 270];
 export const TimePerQuizSet: number = 600;
 export const FeedBack: { [key: string]: FeedBackEntry } = {
 	S: {

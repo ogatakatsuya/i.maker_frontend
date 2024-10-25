@@ -92,7 +92,7 @@ const QuizSet = () => {
 						objectFit="contain"
 						className="logo"
 						position="absolute"
-						transform="translateX(-50%)"
+						transform="translate(-50%, -5%)"
 						zIndex={2}
 					/>
 				)}
@@ -106,7 +106,7 @@ const QuizSet = () => {
 						objectFit="contain"
 						className="logo"
 						position="absolute"
-						transform="translateX(-50%)"
+						transform="translate(-50%, -5%)"
 						zIndex={2}
 					/>
 				)}
