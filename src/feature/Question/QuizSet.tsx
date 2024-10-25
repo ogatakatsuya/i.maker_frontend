@@ -127,7 +127,10 @@ const QuizSet = () => {
 					</Box>
 					<Box px={5}>
 						<Heading p={3} as="h1" size="lg" textAlign="left">
-							{questionIndex === 3 ? "謎解き概論l" : "謎解き概論I"} 期末追加試験
+							<Text as="span" fontFamily="'Trebuchet MS', sans-serif">
+								{questionIndex === 3 ? "謎解き概論l" : "謎解き概論I"}{" "}
+								期末追加試験
+							</Text>
 						</Heading>
 						<Divider />
 						<Box textAlign="left" p={3}>
