@@ -11,7 +11,7 @@ export type FeedBackEntry = {
 };
 
 export const TimeToDisplayHint: number[] = [180, 120, 270];
-export const TimePerQuizSet: number = 600;
+export const TimePerQuizSet: number = 580;
 export const FeedBack: { [key: string]: FeedBackEntry } = {
 	S: {
 		credits: "S",
