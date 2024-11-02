@@ -28,23 +28,26 @@ const Result = () => {
 				if (response.data?.score) {
 					setScore(response.data?.score);
 					setNickName(response.data?.name);
-					if (score != null) {
-						if (score >= 90) {
-							setFeedback(FeedBack.S);
-						} else if (score >= 80) {
-							setFeedback(FeedBack.A);
-						} else if (score >= 70) {
-							setFeedback(FeedBack.B);
-						} else if (score >= 60) {
-							setFeedback(FeedBack.C);
-						} else {
-							setFeedback(FeedBack.F);
-						}
-					}
 				}
 			}
 		};
 		fetchScore();
+	}, []);
+
+	useEffect(() => {
+		if (score != null) {
+			if (score >= 90) {
+				setFeedback(FeedBack.S);
+			} else if (score >= 80) {
+				setFeedback(FeedBack.A);
+			} else if (score >= 70) {
+				setFeedback(FeedBack.B);
+			} else if (score >= 60) {
+				setFeedback(FeedBack.C);
+			} else {
+				setFeedback(FeedBack.F);
+			}
+		}
 	}, [score]);
 	return (
 		<Box w="full" minHeight="100vh">
